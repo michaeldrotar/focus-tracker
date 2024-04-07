@@ -1,0 +1,32 @@
+{
+  "name": "@michaeldrotar/focus-tracker-js",
+  "version": "0.1.0",
+  "description": "",
+  "type": "module",
+  "main": "dist/focus-tracker.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/focus-tracker.js",
+      "require": "./dist/focus-tracker.cjs"
+    }
+  },
+  "scripts": {
+    "build": "tsc && vite build",
+    "build:watch": "vite build --watch",
+    "test": "vitest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "happy-dom": "^14.6.2",
+    "typescript": "^5.4.3",
+    "vite": "^5.2.0",
+    "vite-plugin-dts": "^3.8.1",
+    "vitest": "^1.4.0"
+  }
+}

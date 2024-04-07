@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + TS</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <div>
+      <h1>Focus Tracker Demo</h1>
+      <h2>Form Without Focus Tracker</h2>
+      <p>
+        The below form is not using the focus tracker in order to show a
+        comparison of the default browser behavior.
+      </p>
+      <form onsubmit="return false;">
+        <input type="text" />
+        <select>
+          <option>Option 1</option>
+          <option>Option 2</option>
+          <option>Option 3</option>
+        </select>
+        <textarea></textarea>
+        <button type="submit">Submit</button>
+      </form>
+      <h2>Form With Focus Tracker</h2>
+      <p>The below form is using the focus tracker.</p>
+      <div data-focus-tracker>
+        <form onsubmit="return false;">
+          <input type="text" />
+          <select>
+            <option>Option 1</option>
+            <option>Option 2</option>
+            <option>Option 3</option>
+          </select>
+          <textarea></textarea>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+    <script src="../focus-tracker-js/dist/index.js"></script>
+  </body>
+</html>

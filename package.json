@@ -1,0 +1,24 @@
+{
+  "name": "@michaeldrotar/focus-tracker",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "lint": "prettier --write --ignore-unknown .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "dependencies": {
+    "@michaeldrotar/react-focus-tracker": "^1.0.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.2.5",
+    "turbo": "^1.13.2"
+  }
+}

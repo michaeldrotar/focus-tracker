@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <title>Focus Tracker Demo</title>
+  </head>
+  <body>
+    <h1>Focus Tracker Demo</h1>
+    <h2>Form Without Focus Tracker</h2>
+    <p>
+      The below form is not using the focus tracker in order to show a
+      comparison of the default browser behavior.
+    </p>
+    <form onsubmit="return false;">
+      <input type="text" />
+      <select>
+        <option>Option 1</option>
+        <option>Option 2</option>
+        <option>Option 3</option>
+      </select>
+      <textarea></textarea>
+      <button type="submit">Submit</button>
+    </form>
+    <h2>Form With Focus Tracker</h2>
+    <p>The below form is using the focus tracker.</p>
+    <div data-focus-tracker>
+      <form onsubmit="return false;">
+        <input type="text" />
+        <select>
+          <option>Option 1</option>
+          <option>Option 2</option>
+          <option>Option 3</option>
+        </select>
+        <textarea></textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <script src="./dist/index.js"></script>
+  </body>
+</html>
