@@ -2,31 +2,26 @@
   "name": "@michaeldrotar/focus-tracker-js",
   "version": "0.1.0",
   "description": "",
-  "type": "module",
-  "main": "dist/focus-tracker.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": {
-      "import": "./dist/focus-tracker.js",
-      "require": "./dist/focus-tracker.cjs"
-    }
+    ".": "./src/index.ts"
   },
   "scripts": {
-    "build": "tsc && vite build",
-    "build:watch": "vite build --watch",
-    "test": "vitest"
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "dev": "npm run build -- --watch",
+    "lint": "eslint . --max-warnings 0"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "happy-dom": "^14.6.2",
-    "typescript": "^5.4.3",
-    "vite": "^5.2.0",
-    "vite-plugin-dts": "^3.8.1",
-    "vitest": "^1.4.0"
+    "@repo/eslint-config": "*",
+    "@repo/typescript-config": "*",
+    "@types/eslint": "^8.56.5",
+    "eslint": "^8.57.0",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.3"
   }
 }
