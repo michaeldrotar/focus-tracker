@@ -359,6 +359,12 @@ export const focusTracker = {
   },
 }
 
+declare global {
+  interface Window {
+    focusTracker?: typeof focusTracker
+  }
+}
+
 if (typeof window !== 'undefined' && !window.focusTracker) {
   window.focusTracker = focusTracker
 }
