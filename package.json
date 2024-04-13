@@ -6,9 +6,10 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format2": "prettier --write \"**/*.{.json,html,ts,tsx,md}\"",
     "format": "prettier --write . --ignore-unknown",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "add-changeset": "changeset add",
+    "publish-package": "turbo run build lint test && changeset version && changeset publish"
   },
   "keywords": [],
   "author": "",
@@ -17,14 +18,12 @@
     "apps/*",
     "packages/*"
   ],
-  "dependencies": {
-    "@michaeldrotar/react-focus-tracker": "^1.0.0"
-  },
   "engines": {
     "node": ">=18"
   },
   "packageManager": "npm@10.2.4",
   "devDependencies": {
+    "@changesets/cli": "^2.27.1",
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
     "prettier": "^3.2.5",
