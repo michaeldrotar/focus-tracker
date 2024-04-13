@@ -2,14 +2,14 @@
   "name": "@michaeldrotar/react-focus-tracker",
   "version": "1.0.0",
   "description": "",
+  "keywords": [],
+  "license": "MIT",
+  "author": "",
   "main": "index.js",
   "scripts": {
     "start": "ts-node index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
   "dependencies": {
     "@michaeldrotar/focus-tracker-js": "file:../focus-tracker-js",
     "@michaeldrotar/vite-project": "file:../vite-project",
