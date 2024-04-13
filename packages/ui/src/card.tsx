@@ -3,6 +3,7 @@ export function Card({
   title,
   children,
   href,
+  ...restProps
 }: {
   className?: string
   title: string
@@ -15,6 +16,7 @@ export function Card({
       href={`${href}?utm_source=create-turbo&utm_medium=basic&utm_campaign=create-turbo"`}
       rel="noopener noreferrer"
       target="_blank"
+      {...restProps}
     >
       <h2>
         {title} <span>-&gt;</span>

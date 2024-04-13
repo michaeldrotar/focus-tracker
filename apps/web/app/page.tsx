@@ -137,10 +137,13 @@ export default function Page(): JSX.Element {
       <div className={styles.grid}>
         {LINKS.map(({ title, href, description }, index) => (
           <Card
-            className={styles.card + ` card-${index + 1}`}
+            className={styles.card}
             href={href}
             key={title}
             title={title}
+            data-focus-tracker--class={
+              'glow ' + ['red', 'red-purple', 'purple-blue', 'blue'][index]
+            }
           >
             {description}
           </Card>
