@@ -18,13 +18,17 @@ module.exports = {
     node: true,
     browser: true,
   },
-  plugins: ['only-warn'],
+  plugins: ['only-warn', 'unused-imports'],
   settings: {
     'import/resolver': {
       typescript: {
         project,
       },
     },
+  },
+  rules: {
+    'no-useless-escape': 'off',
+    'unused-imports/no-unused-imports': 'error',
   },
   ignorePatterns: [
     // Ignore dotfiles

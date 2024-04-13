@@ -2,32 +2,35 @@
   "name": "focus-tracker",
   "private": true,
   "description": "",
-  "scripts": {
-    "build": "turbo build",
-    "dev": "turbo dev",
-    "lint": "turbo lint",
-    "format": "prettier --write . --ignore-unknown",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "add-changeset": "changeset add",
-    "publish-package": "turbo run build lint test && changeset version && changeset publish"
-  },
   "keywords": [],
-  "author": "",
   "license": "MIT",
+  "author": "",
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
-  "engines": {
-    "node": ">=18"
+  "scripts": {
+    "add-changeset": "changeset add",
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "format": "prettier --write . --ignore-unknown",
+    "lint": "turbo lint",
+    "prepare": "husky",
+    "publish-package": "turbo run build lint test && changeset version && changeset publish",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "packageManager": "npm@10.2.4",
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
     "prettier-plugin-packagejson": "^2.5.0",
     "turbo": "^1.13.2"
+  },
+  "packageManager": "npm@10.2.4",
+  "engines": {
+    "node": ">=18"
   }
 }

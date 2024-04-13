@@ -5,7 +5,7 @@ const project = resolve(process.cwd(), 'tsconfig.json')
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
   extends: ['eslint:recommended', 'prettier', 'eslint-config-turbo'],
-  plugins: ['only-warn'],
+  plugins: ['only-warn', 'unused-imports'],
   globals: {
     React: true,
     JSX: true,
@@ -19,6 +19,10 @@ module.exports = {
         project,
       },
     },
+  },
+  rules: {
+    'no-useless-escape': 'off',
+    'unused-imports/no-unused-imports': 'error',
   },
   ignorePatterns: [
     // Ignore dotfiles

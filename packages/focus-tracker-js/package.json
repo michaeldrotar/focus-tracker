@@ -2,20 +2,20 @@
   "name": "@michaeldrotar/focus-tracker-js",
   "version": "0.1.0",
   "description": "",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "keywords": [],
+  "license": "MIT",
+  "author": "",
   "exports": {
     ".": "./src/index.ts"
   },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts",
     "dev": "npm run build -- --watch",
-    "lint": "eslint . --max-warnings 0"
+    "lint": "eslint . --fix --max-warnings 0"
   },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
   "devDependencies": {
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
