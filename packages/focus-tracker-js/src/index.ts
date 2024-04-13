@@ -1,5 +1,4 @@
 import { getElementConfiguration } from './getElementConfiguration/getElementConfiguration'
-import { getElementPosition } from './getElementPosition/getElementPosition'
 import { getStackingParent } from './getStackingParent/getStackingParent'
 import { getVisuallyFocusedElement } from './getVisuallyFocusedElement/getVisuallyFocusedElement'
 
@@ -60,36 +59,6 @@ const enableTransition = () => {
   if (!tracker || !container) return
   tracker.style.transition = 'ease-in-out all 200ms'
   container.style.transition = 'ease-in-out all 200ms'
-}
-
-const updateTracker = (target: HTMLElement) => {
-  const tracker = internal.focusTrackerEl
-  if (!tracker) return
-
-  // get scroll container parent of target
-
-  const parent = getStackingParent(target)
-  if (tracker.parentElement !== parent) {
-    // parent.append(tracker)
-    // if (parent === document.body) {
-    //   internal.containerEl!.style.position = 'fixed'
-    // } else {
-    //   internal.containerEl!.style.position = 'absolute'
-    // }
-    // parent.append(internal.containerEl)
-  }
-
-  const position = getElementPosition(target)
-  const elementConfiguration: FocusTrackerConfiguration = {
-    ...configuration,
-    ...getElementConfiguration(target),
-  }
-  tracker.style.left = `${position.x}px`
-  tracker.style.top = `${position.y}px`
-  tracker.style.width = `${target.offsetWidth}px`
-  tracker.style.height = `${target.offsetHeight}px`
-  tracker.style.borderRadius = `${window.getComputedStyle(target).borderRadius}`
-  tracker.className = `focus-tracker-indicator ${elementConfiguration.class}`
 }
 
 type Rect = {
@@ -186,7 +155,7 @@ let lastParent: HTMLElement | undefined
 let lastTargetRect: Rect | undefined
 let lastParentRect: Rect | undefined
 
-const anchorTracker = (target: HTMLElement) => {
+const updateTracker = (target: HTMLElement) => {
   const tracker = internal.focusTrackerEl
   const container = internal.containerEl
   if (!tracker || !container) return
@@ -241,102 +210,12 @@ const anchorTracker = (target: HTMLElement) => {
   lastTarget = target
 }
 
-const anchorTracker2 = (target: HTMLElement) => {
-  const tracker = internal.focusTrackerEl
-  const container = internal.containerEl
-  if (!tracker || !container) return
-
-  const targetRect = target.getBoundingClientRect()
-  if (
-    lastTargetRect &&
-    lastTargetRect.x === targetRect.x &&
-    lastTargetRect.y === targetRect.y &&
-    lastTargetRect.width === targetRect.width &&
-    lastTargetRect.height === targetRect.height
-  ) {
-    return
-  }
-
-  // if (lastTarget && lastTarget !== target) {
-  //   return
-  // }
-  // lastTarget = target
-
-  const parent = getStackingParent(target)
-  const parentRect = parent.getBoundingClientRect()
-  // if (!container.style.left) {
-  //   container.style.left = `${parentRect.x + window.scrollX}px`
-  //   container.style.top = `${parentRect.y + window.scrollY}px`
-  //   container.style.width = `${parentRect.width}px`
-  //   container.style.height = `${parentRect.height}px`
-  // }
-  // container.style.left = `${parentRect.x + window.scrollX}px`
-  // container.style.top = `${parentRect.y + window.scrollY}px`
-  if (
-    lastParentRect &&
-    lastParentRect.x === parentRect.x &&
-    lastParentRect.y === parentRect.y &&
-    lastParentRect.width === parentRect.width &&
-    lastParentRect.height === parentRect.height
-  ) {
-    disableTransition()
-    // const position = getElementPosition(target)
-    // tracker.style.left = `${position.x}px`
-    // tracker.style.top = `${position.y}px`
-    // tracker.style.width = `${target.offsetWidth}px`
-    // tracker.style.height = `${target.offsetHeight}px`
-
-    // tracker.style.left = `${targetRect.x - parentRect.x}px`
-    // tracker.style.top = `${targetRect.y - parentRect.y}px`
-    // // tracker.style.left = `${rect.x + window.scrollX}px`
-    // // tracker.style.top = `${rect.y + window.scrollY}px`
-    // tracker.style.width = `${targetRect.width}px`
-    // tracker.style.height = `${targetRect.height}px`
-    // tracker.style.borderRadius = `${window.getComputedStyle(target).borderRadius}`
-    // enableTransition()
-  } else {
-    container.style.left = '0'
-    container.style.top = '0'
-    container.style.transform = `translate(${parentRect.x + window.scrollX}px, ${parentRect.y + window.scrollY}px)`
-    container.style.width = `${parentRect.width}px`
-    container.style.height = `${parentRect.height}px`
-
-    // console.log({ parentRect })
-
-    // if (lastTargetRect) {
-    //   disableTransition()
-    //   tracker.style.left = `${lastTargetRect.x - parentRect.x}px`
-    //   tracker.style.top = `${lastTargetRect.y - parentRect.y}px`
-    //   // tracker.style.left = `${rect.x + window.scrollX}px`
-    //   // tracker.style.top = `${rect.y + window.scrollY}px`
-    //   tracker.style.width = `${lastTargetRect.width}px`
-    //   tracker.style.height = `${lastTargetRect.height}px`
-    //   tracker.style.borderRadius = `${window.getComputedStyle(target).borderRadius}`
-    //   enableTransition()
-    // }
-  }
-
-  disableTransition()
-  tracker.style.left = `${targetRect.x - parentRect.x}px`
-  tracker.style.top = `${targetRect.y - parentRect.y}px`
-  // tracker.style.left = `${rect.x + window.scrollX}px`
-  // tracker.style.top = `${rect.y + window.scrollY}px`
-  tracker.style.width = `${targetRect.width}px`
-  tracker.style.height = `${targetRect.height}px`
-  tracker.style.borderRadius = `${window.getComputedStyle(target).borderRadius}`
-  enableTransition()
-
-  lastParentRect = parentRect
-  lastTargetRect = targetRect
-}
-
 const addTracker = (target: HTMLElement) => {
   const tracker = internal.focusTrackerEl
   const container = internal.containerEl
   if (!tracker || !container) return
 
   // updateTracker(target)
-  // anchorTracker(target, { force: true })
 
   const targetRect = getElementRect(target)
 
@@ -382,10 +261,8 @@ const updateFocus = () => {
       removeTracker()
     } else if (!internal.target && focusedElement) {
       addTracker(focusedElement)
-      // } else if (internal.target !== focusedElement) {
-      //   updateTracker(focusedElement)
     } else {
-      anchorTracker(focusedElement)
+      updateTracker(focusedElement)
     }
     if (internal.target !== focusedElement) internal.target = focusedElement
   } else if (internal.target) {
@@ -398,10 +275,10 @@ export const focusTracker = {
   configure: (options: Partial<FocusTrackerConfiguration>) => {
     Object.assign(configuration, options)
   },
-  register: (el: HTMLElement | string, options: { attrPrefix: string }) => {},
-  unregister: (el: HTMLElement | string) => {},
-  watch: (selector: string, options: { style: { color: string } }) => {},
-  unwatch: (selector: string) => {},
+  // register: (el: HTMLElement | string, options: { attrPrefix: string }) => {},
+  // unregister: (el: HTMLElement | string) => {},
+  // watch: (selector: string, options: { style: { color: string } }) => {},
+  // unwatch: (selector: string) => {},
   start: () => {
     if (internal.started) return
     if (configuration.debug) {

@@ -1,5 +1,4 @@
 import { FocusTrackerConfiguration } from '..'
-import { getFocusedElement } from '../getFocusedElement/getFocusedElement'
 
 export function getElementConfiguration(element: HTMLElement) {
   const configuration: Partial<FocusTrackerConfiguration> = {}
