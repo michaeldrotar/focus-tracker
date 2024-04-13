@@ -11,8 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@michaeldrotar/focus-tracker-js": "file:../focus-tracker-js",
-    "@michaeldrotar/vite-project": "file:../vite-project",
+    "@michaeldrotar/focus-tracker-js": "0.1.0",
     "ts-node": "^10.9.2"
   }
 }
