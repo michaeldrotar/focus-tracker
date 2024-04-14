@@ -16,8 +16,8 @@
     "format": "prettier --write . --ignore-unknown",
     "lint": "turbo lint",
     "prepare": "husky",
-    "publish-package": "turbo run build lint test && changeset version && changeset publish",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "publish-packages": "turbo run build lint test && changeset version && changeset publish",
+    "test": "echo \"Error: no test specified\""
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
