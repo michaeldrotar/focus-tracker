@@ -8,11 +8,11 @@ export default function FocusTrackerImportSetup() {
   const componentsRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
     if (!componentsRef.current) return
-    const componentsEl = componentsRef.current
+    // const componentsEl = componentsRef.current
     focusTracker.configure({ debug: true })
-    focusTracker.register(componentsEl)
+    // focusTracker.register(componentsEl)
     focusTracker.start()
-    return () => focusTracker.unregister(componentsEl)
+    // return () => focusTracker.unregister(componentsEl)
   }, [])
   return (
     <>
