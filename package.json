@@ -20,7 +20,7 @@
     "publish-packages": "turbo run build lint test && changeset version && changeset publish",
     "test": "echo \"Error: no test specified\""
   },
-  "devDependencies": {
+  "dependencies": {
     "@changesets/cli": "^2.27.1",
     "@manypkg/cli": "^0.21.3",
     "@repo/eslint-config": "*",
