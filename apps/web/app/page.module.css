@@ -319,7 +319,7 @@
   line-height: 20px;
   list-style: none;
   margin: 0;
-  outline: none;
+  /* outline: none; */
   padding: 10px 16px;
   position: relative;
   text-align: center;
@@ -331,7 +331,6 @@
   touch-action: manipulation;
 }
 
-.button:hover,
-.button:focus {
+.button:hover {
   background-color: #e5e4e2;
 }

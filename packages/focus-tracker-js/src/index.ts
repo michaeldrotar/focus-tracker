@@ -1,8 +1,12 @@
-import { getElementConfiguration } from './getElementConfiguration/getElementConfiguration'
+import { internalState } from './internalState'
+import { baseConfiguration } from './baseConfiguration'
+import { getElementConfiguration } from './getElementConfiguration'
 import { getStackingParent } from './getStackingParent/getStackingParent'
 import { getVisuallyFocusedElement } from './getVisuallyFocusedElement/getVisuallyFocusedElement'
+import { FocusTrackerConfiguration } from './types/FocusTrackerConfiguration'
+import { register, unregister } from './registrations'
 
-export { getFocusedElement } from './getFocusedElement/getFocusedElement'
+import { applyConfiguration } from './configurations'
 
 /*
   focusTracker.register(document.body, { attrPrefix: 'data-focus-tracker'})
@@ -11,34 +15,15 @@ export { getFocusedElement } from './getFocusedElement/getFocusedElement'
   focusTracker.start()
 */
 
-export type FocusTrackerConfiguration = {
-  class: string
-  debug: boolean
-}
-
-const internal = {
-  started: false,
-  loopId: 0,
-  isKeyboard: false,
-  focusTrackerEl: undefined as HTMLElement | undefined,
-  containerEl: undefined as HTMLElement | undefined,
-  target: undefined as HTMLElement | undefined,
-}
-
-const configuration: FocusTrackerConfiguration = {
-  class: '',
-  debug: false,
-}
-
 const listener = (event: KeyboardEvent | MouseEvent) => {
-  const wasKeyboard = internal.isKeyboard
+  const wasKeyboard = internalState.isKeyboard
   if ('key' in event) {
-    if (event.key === 'Tab') internal.isKeyboard = true
+    if (event.key === 'Tab') internalState.isKeyboard = true
   } else {
-    internal.isKeyboard = false
+    internalState.isKeyboard = false
   }
-  if (wasKeyboard !== internal.isKeyboard) {
-    if (internal.isKeyboard) {
+  if (wasKeyboard !== internalState.isKeyboard) {
+    if (internalState.isKeyboard) {
       document.documentElement.classList.add('focus-tracker-visible')
     } else {
       document.documentElement.classList.remove('focus-tracker-visible')
@@ -47,15 +32,15 @@ const listener = (event: KeyboardEvent | MouseEvent) => {
 }
 
 const disableTransition = () => {
-  const tracker = internal.focusTrackerEl
-  const container = internal.containerEl
+  const tracker = internalState.focusTrackerEl
+  const container = internalState.containerEl
   if (!tracker || !container) return
   tracker.style.transition = 'none'
   container.style.transition = 'none'
 }
 const enableTransition = () => {
-  const tracker = internal.focusTrackerEl
-  const container = internal.containerEl
+  const tracker = internalState.focusTrackerEl
+  const container = internalState.containerEl
   if (!tracker || !container) return
   tracker.style.transition = 'ease-in-out all 200ms'
   container.style.transition = 'ease-in-out all 200ms'
@@ -151,13 +136,16 @@ const assignRect = (
 }
 
 let lastTarget: HTMLElement | undefined
-let lastParent: HTMLElement | undefined
+// let lastParent: HTMLElement | undefined
 let lastTargetRect: Rect | undefined
 let lastParentRect: Rect | undefined
 
-const updateTracker = (target: HTMLElement) => {
-  const tracker = internal.focusTrackerEl
-  const container = internal.containerEl
+const updateTracker = (
+  target: HTMLElement,
+  configuration: FocusTrackerConfiguration,
+) => {
+  const tracker = internalState.focusTrackerEl
+  const container = internalState.containerEl
   if (!tracker || !container) return
 
   const targetRect = getElementRect(target)
@@ -168,23 +156,9 @@ const updateTracker = (target: HTMLElement) => {
   const targetChanged = !lastTarget || lastTarget !== target
   const targetRectChanged =
     !lastTargetRect || rectsDiffer(lastTargetRect, targetRect)
-  const parentChanged = !lastParent || lastParent !== parent
+  // const parentChanged = !lastParent || lastParent !== parent
   const parentRectChanged =
     !lastParentRect || rectsDiffer(lastParentRect, parentRect)
-
-  if (
-    targetChanged ||
-    targetRectChanged ||
-    parentChanged ||
-    parentRectChanged
-  ) {
-    console.log({
-      targetChanged,
-      targetRectChanged,
-      parentChanged,
-      parentRectChanged,
-    })
-  }
 
   if (parentRectChanged) {
     assignRect(container, parentRect, { addWindow: true })
@@ -194,28 +168,25 @@ const updateTracker = (target: HTMLElement) => {
     enableTransition()
     assignRect(tracker, targetRect, { relativeTo: parentRect })
 
-    const elementConfiguration: FocusTrackerConfiguration = {
-      ...configuration,
-      ...getElementConfiguration(target),
-    }
-    tracker.className = `focus-tracker-indicator ${elementConfiguration.class}`
+    applyConfiguration(tracker, configuration)
   } else if (targetRectChanged) {
     disableTransition()
     assignRect(tracker, targetRect, { relativeTo: parentRect })
   }
 
   lastParentRect = parentRect
-  lastParent = parent
+  // lastParent = parent
   lastTargetRect = targetRect
   lastTarget = target
 }
 
-const addTracker = (target: HTMLElement) => {
-  const tracker = internal.focusTrackerEl
-  const container = internal.containerEl
+const addTracker = (
+  target: HTMLElement,
+  configuration: FocusTrackerConfiguration,
+) => {
+  const tracker = internalState.focusTrackerEl
+  const container = internalState.containerEl
   if (!tracker || !container) return
-
-  // updateTracker(target)
 
   const targetRect = getElementRect(target)
 
@@ -228,11 +199,7 @@ const addTracker = (target: HTMLElement) => {
     transform: 'scale(2)',
   })
 
-  const elementConfiguration: FocusTrackerConfiguration = {
-    ...configuration,
-    ...getElementConfiguration(target),
-  }
-  tracker.className = `focus-tracker-indicator ${elementConfiguration.class}`
+  applyConfiguration(tracker, configuration)
 
   tracker.style.opacity = '0'
   // assignTransform(tracker, { scale: '2' })
@@ -246,7 +213,7 @@ const addTracker = (target: HTMLElement) => {
 }
 
 const removeTracker = () => {
-  const tracker = internal.focusTrackerEl
+  const tracker = internalState.focusTrackerEl
   if (!tracker) return
 
   enableTransition()
@@ -255,76 +222,84 @@ const removeTracker = () => {
 }
 
 const updateFocus = () => {
-  if (internal.isKeyboard) {
+  if (internalState.isKeyboard) {
     const focusedElement = getVisuallyFocusedElement()
     if (!focusedElement) {
-      removeTracker()
-    } else if (!internal.target && focusedElement) {
-      addTracker(focusedElement)
+      if (internalState.target) {
+        removeTracker()
+        internalState.target = undefined
+      }
     } else {
-      updateTracker(focusedElement)
+      const configuration = getElementConfiguration(focusedElement)
+      if (!configuration) {
+        if (internalState.target) {
+          removeTracker()
+          internalState.target = undefined
+        }
+      } else if (!internalState.target) {
+        addTracker(focusedElement, configuration)
+        internalState.target = focusedElement
+      } else {
+        updateTracker(focusedElement, configuration)
+        if (internalState.target !== focusedElement) {
+          internalState.target = focusedElement
+        }
+      }
     }
-    if (internal.target !== focusedElement) internal.target = focusedElement
-  } else if (internal.target) {
+  } else if (internalState.target) {
     removeTracker()
-    internal.target = undefined
+    internalState.target = undefined
   }
 }
 
-export const focusTracker = {
+const focusTracker = {
   configure: (options: Partial<FocusTrackerConfiguration>) => {
-    Object.assign(configuration, options)
+    Object.assign(baseConfiguration, options)
   },
-  // register: (el: HTMLElement | string, options: { attrPrefix: string }) => {},
-  // unregister: (el: HTMLElement | string) => {},
+  register,
+  unregister,
   // watch: (selector: string, options: { style: { color: string } }) => {},
   // unwatch: (selector: string) => {},
   start: () => {
-    if (internal.started) return
-    if (configuration.debug) {
-      console.log('Focus tracker started')
-    }
+    if (internalState.started) return
 
-    if (!internal.focusTrackerEl) {
-      internal.containerEl = document.createElement('div')
-      internal.containerEl.className = 'focus-tracker-container'
-      internal.containerEl.style.pointerEvents = 'none'
+    if (!internalState.focusTrackerEl) {
+      internalState.containerEl = document.createElement('div')
+      internalState.containerEl.className = 'focus-tracker-container'
+      internalState.containerEl.style.pointerEvents = 'none'
       // internal.containerEl.style.position = 'fixed'
-      internal.containerEl.style.position = 'absolute'
-      internal.containerEl.style.overflow = 'hidden'
+      internalState.containerEl.style.position = 'absolute'
+      internalState.containerEl.style.overflow = 'hidden'
       // internal.containerEl.style.inset = '0'
 
-      internal.containerEl.style.transition = 'ease-in-out all 200ms'
+      internalState.containerEl.style.transition = 'ease-in-out all 200ms'
 
-      if (configuration.debug) {
-        // internal.containerEl.style.backgroundColor = 'rgba(255, 255, 255, 0.1)'
-      }
+      document.body.appendChild(internalState.containerEl)
 
-      document.body.appendChild(internal.containerEl)
+      internalState.focusTrackerEl = document.createElement('div')
+      // internalState.focusTrackerEl.className = 'focus-tracker-indicator'
+      internalState.focusTrackerEl.style.pointerEvents = 'none'
+      internalState.focusTrackerEl.style.position = 'absolute'
 
-      internal.focusTrackerEl = document.createElement('div')
-      internal.focusTrackerEl.className = 'focus-tracker-indicator'
-      internal.focusTrackerEl.style.pointerEvents = 'none'
-      internal.focusTrackerEl.style.position = 'absolute'
       // internal.focusTrackerEl.style.zIndex = '50'
       // internal.focusTrackerEl.style.border = '2px solid red'
       // internal.focusTrackerEl.style.transition = 'ease-in-out all 200ms'
       // internal.focusTrackerEl.style.opacity = '0'
-      internal.containerEl.appendChild(internal.focusTrackerEl)
+      internalState.containerEl.appendChild(internalState.focusTrackerEl)
 
-      const style = document.createElement('style')
-      style.innerHTML = `
-        .focus-tracker-visible *:focus,
-        .focus-tracker-visible *:focus-visible {
-          outline: none;
-        }
+      // const style = document.createElement('style')
+      // style.innerHTML = `
+      //   .focus-tracker-visible *:focus,
+      //   .focus-tracker-visible *:focus-visible {
+      //     outline: none;
+      //   }
 
-        *:focus,
-        *:focus-visible {
-          outline: none;
-        }
-      `
-      document.body.appendChild(style)
+      //   *:focus,
+      //   *:focus-visible {
+      //     outline: none;
+      //   }
+      // `
+      // document.body.appendChild(style)
 
       //       <div
       //         ref={focusTrackerEl}
@@ -335,27 +310,24 @@ export const focusTracker = {
 
     const loop = () => {
       updateFocus()
-      internal.loopId = requestAnimationFrame(loop)
+      internalState.loopId = requestAnimationFrame(loop)
     }
     loop()
 
     document.addEventListener('keydown', listener)
     document.addEventListener('mousedown', listener)
 
-    internal.started = true
+    internalState.started = true
   },
   stop: () => {
-    if (!internal.started) return
-    if (configuration.debug) {
-      console.log('Focus tracker stopped')
-    }
-    if (internal.loopId) {
-      cancelAnimationFrame(internal.loopId)
-      internal.loopId = 0
+    if (!internalState.started) return
+    if (internalState.loopId) {
+      cancelAnimationFrame(internalState.loopId)
+      internalState.loopId = 0
     }
     document.removeEventListener('keydown', listener)
     document.removeEventListener('mousedown', listener)
-    internal.started = false
+    internalState.started = false
   },
 }
 
@@ -368,3 +340,6 @@ declare global {
 if (typeof window !== 'undefined' && !window.focusTracker) {
   window.focusTracker = focusTracker
 }
+
+export { focusTracker }
+export type { FocusTrackerConfiguration } from './types/FocusTrackerConfiguration'

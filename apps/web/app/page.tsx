@@ -141,8 +141,13 @@ export default function Page(): JSX.Element {
             href={href}
             key={title}
             title={title}
-            data-focus-tracker--class={
-              'glow ' + ['red', 'red-purple', 'purple-blue', 'blue'][index]
+            color={
+              [
+                '#e92a67',
+                'color-mix(in hsl, #e92a67 50%, #a853ba 50%)',
+                'color-mix(in hsl, #a853ba 50%, #2a8af6 50%)',
+                '#2a8af6',
+              ][index]
             }
           >
             {description}

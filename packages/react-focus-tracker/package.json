@@ -1,17 +1,31 @@
 {
   "name": "@michaeldrotar/react-focus-tracker",
   "version": "0.1.2",
-  "description": "",
-  "keywords": [],
+  "description": "Enhances focus tracking with transitions and customization to make the experience more accessible for users and easier for developers.",
+  "keywords": [
+    "accessibility",
+    "focus tracking",
+    "keyboard navigation"
+  ],
   "license": "MIT",
-  "author": "",
-  "main": "index.js",
+  "author": "Michael Drotar",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "start": "ts-node index.ts",
-    "test": "echo \"Error: no test specified\""
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "dev": "npm run build -- --watch",
+    "lint": "eslint . --fix --max-warnings 0"
   },
   "dependencies": {
-    "@michaeldrotar/focus-tracker-js": "0.1.2",
-    "ts-node": "^10.9.2"
+    "@michaeldrotar/focus-tracker-js": "0.1.2"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "*",
+    "@repo/typescript-config": "*",
+    "@types/eslint": "^8.56.5",
+    "eslint": "^8.57.0",
+    "tsup": "^8.0.2",
+    "typescript": "^5.3.3"
   }
 }
