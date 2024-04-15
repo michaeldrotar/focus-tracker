@@ -5,9 +5,6 @@
   "keywords": [],
   "license": "MIT",
   "author": "",
-  "exports": {
-    ".": "./src/index.ts"
-  },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
