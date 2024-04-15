@@ -5,3 +5,7 @@ Enhances focus tracking with transitions and customization to make the experienc
 See the video demonstration below.
 
 [![Demonstration video](https://img.youtube.com/vi/W8CgSiQ7eJA/hqdefault.jpg)](https://youtu.be/W8CgSiQ7eJA)]
+
+For specific implementations, check the nested packages:
+
+- [focus-tracker-js](https://github.com/michaeldrotar/focus-tracker/tree/main/packages/focus-tracker-js)
