@@ -8,6 +8,7 @@ import { register, unregister } from './registrations'
 
 import { applyConfiguration } from './configurations'
 import { addDocumentEventHandlers, removeDocumentEventHandlers } from './events'
+import { createFocusTrackerIndicator } from './createFocusTrackerIndicator'
 
 /*
   focusTracker.register(document.body, { attrPrefix: 'data-focus-tracker'})
@@ -17,14 +18,14 @@ import { addDocumentEventHandlers, removeDocumentEventHandlers } from './events'
 */
 
 const disableTransition = () => {
-  const tracker = internalState.focusTrackerEl
+  const tracker = internalState.indicatorEl
   const container = internalState.containerEl
   if (!tracker || !container) return
   tracker.style.transition = 'none'
   container.style.transition = 'none'
 }
 const enableTransition = () => {
-  const tracker = internalState.focusTrackerEl
+  const tracker = internalState.indicatorEl
   const container = internalState.containerEl
   if (!tracker || !container) return
   tracker.style.transition = 'ease-in-out all 200ms'
@@ -129,7 +130,7 @@ const updateTracker = (
   target: HTMLElement,
   configuration: FocusTrackerConfiguration,
 ) => {
-  const tracker = internalState.focusTrackerEl
+  const tracker = internalState.indicatorEl
   const container = internalState.containerEl
   if (!tracker || !container) return
 
@@ -169,7 +170,7 @@ const addTracker = (
   target: HTMLElement,
   configuration: FocusTrackerConfiguration,
 ) => {
-  const tracker = internalState.focusTrackerEl
+  const tracker = internalState.indicatorEl
   const container = internalState.containerEl
   if (!tracker || !container) return
 
@@ -198,7 +199,7 @@ const addTracker = (
 }
 
 const removeTracker = () => {
-  const tracker = internalState.focusTrackerEl
+  const tracker = internalState.indicatorEl
   if (!tracker) return
 
   enableTransition()
@@ -248,48 +249,11 @@ const focusTracker = {
   start: () => {
     if (internalState.started) return
 
-    if (!internalState.focusTrackerEl) {
-      internalState.containerEl = document.createElement('div')
-      internalState.containerEl.className = 'focus-tracker-container'
-      internalState.containerEl.style.pointerEvents = 'none'
-      // internal.containerEl.style.position = 'fixed'
-      internalState.containerEl.style.position = 'absolute'
-      internalState.containerEl.style.overflow = 'hidden'
-      // internal.containerEl.style.inset = '0'
-
-      internalState.containerEl.style.transition = 'ease-in-out all 200ms'
-
+    if (!internalState.indicatorEl) {
+      const { containerEl, indicatorEl } = createFocusTrackerIndicator()
+      internalState.containerEl = containerEl
+      internalState.indicatorEl = indicatorEl
       document.body.appendChild(internalState.containerEl)
-
-      internalState.focusTrackerEl = document.createElement('div')
-      internalState.focusTrackerEl.style.pointerEvents = 'none'
-      internalState.focusTrackerEl.style.position = 'absolute'
-
-      // internal.focusTrackerEl.style.zIndex = '50'
-      // internal.focusTrackerEl.style.border = '2px solid red'
-      // internal.focusTrackerEl.style.transition = 'ease-in-out all 200ms'
-      // internal.focusTrackerEl.style.opacity = '0'
-      internalState.containerEl.appendChild(internalState.focusTrackerEl)
-
-      // const style = document.createElement('style')
-      // style.innerHTML = `
-      //   .focus-tracker-visible *:focus,
-      //   .focus-tracker-visible *:focus-visible {
-      //     outline: none;
-      //   }
-
-      //   *:focus,
-      //   *:focus-visible {
-      //     outline: none;
-      //   }
-      // `
-      // document.body.appendChild(style)
-
-      //       <div
-      //         ref={focusTrackerEl}
-      //         className="pointer-events-none absolute z-50 border-2 border-red-400 ring-1 ring-red-500 transition-all duration-200 ring-blur-8"
-      //         style={{ opacity: 0 }}
-      //       ></div>
     }
 
     const loop = () => {
