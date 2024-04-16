@@ -7,6 +7,7 @@ import { FocusTrackerConfiguration } from './types/FocusTrackerConfiguration'
 import { register, unregister } from './registrations'
 
 import { applyConfiguration } from './configurations'
+import { addDocumentEventHandlers, removeDocumentEventHandlers } from './events'
 
 /*
   focusTracker.register(document.body, { attrPrefix: 'data-focus-tracker'})
@@ -14,22 +15,6 @@ import { applyConfiguration } from './configurations'
   focusTracker.watch('button', { style: { color: 'red' } })
   focusTracker.start()
 */
-
-const listener = (event: KeyboardEvent | MouseEvent) => {
-  const wasKeyboard = internalState.isKeyboard
-  if ('key' in event) {
-    if (event.key === 'Tab') internalState.isKeyboard = true
-  } else {
-    internalState.isKeyboard = false
-  }
-  if (wasKeyboard !== internalState.isKeyboard) {
-    if (internalState.isKeyboard) {
-      document.documentElement.classList.add('focus-tracker-visible')
-    } else {
-      document.documentElement.classList.remove('focus-tracker-visible')
-    }
-  }
-}
 
 const disableTransition = () => {
   const tracker = internalState.focusTrackerEl
@@ -313,8 +298,7 @@ const focusTracker = {
     }
     loop()
 
-    document.addEventListener('keydown', listener)
-    document.addEventListener('mousedown', listener)
+    addDocumentEventHandlers()
 
     internalState.started = true
   },
@@ -324,8 +308,7 @@ const focusTracker = {
       cancelAnimationFrame(internalState.loopId)
       internalState.loopId = 0
     }
-    document.removeEventListener('keydown', listener)
-    document.removeEventListener('mousedown', listener)
+    removeDocumentEventHandlers()
     internalState.started = false
   },
 }
