@@ -277,7 +277,6 @@ const focusTracker = {
       document.body.appendChild(internalState.containerEl)
 
       internalState.focusTrackerEl = document.createElement('div')
-      // internalState.focusTrackerEl.className = 'focus-tracker-indicator'
       internalState.focusTrackerEl.style.pointerEvents = 'none'
       internalState.focusTrackerEl.style.position = 'absolute'
 
