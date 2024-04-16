@@ -9,6 +9,7 @@ import { register, unregister } from './registrations'
 import { applyConfiguration } from './configurations'
 import { addDocumentEventHandlers, removeDocumentEventHandlers } from './events'
 import { createFocusTrackerIndicator } from './createFocusTrackerIndicator'
+import { disableTransitions, enableTransitions } from './transitions'
 
 /*
   focusTracker.register(document.body, { attrPrefix: 'data-focus-tracker'})
@@ -16,21 +17,6 @@ import { createFocusTrackerIndicator } from './createFocusTrackerIndicator'
   focusTracker.watch('button', { style: { color: 'red' } })
   focusTracker.start()
 */
-
-const disableTransition = () => {
-  const tracker = internalState.indicatorEl
-  const container = internalState.containerEl
-  if (!tracker || !container) return
-  tracker.style.transition = 'none'
-  container.style.transition = 'none'
-}
-const enableTransition = () => {
-  const tracker = internalState.indicatorEl
-  const container = internalState.containerEl
-  if (!tracker || !container) return
-  tracker.style.transition = 'ease-in-out all 200ms'
-  container.style.transition = 'ease-in-out all 200ms'
-}
 
 type Rect = {
   x: number
@@ -151,12 +137,12 @@ const updateTracker = (
   }
 
   if (targetChanged) {
-    enableTransition()
+    enableTransitions()
     assignRect(tracker, targetRect, { relativeTo: parentRect })
 
     applyConfiguration(tracker, configuration)
   } else if (targetRectChanged) {
-    disableTransition()
+    disableTransitions()
     assignRect(tracker, targetRect, { relativeTo: parentRect })
   }
 
@@ -189,10 +175,10 @@ const addTracker = (
 
   tracker.style.opacity = '0'
   // assignTransform(tracker, { scale: '2' })
-  disableTransition()
+  disableTransitions()
 
   window.requestAnimationFrame(() => {
-    enableTransition()
+    enableTransitions()
     tracker.style.opacity = '1'
     assignTransform(tracker, { scale: '1' })
   })
@@ -202,7 +188,7 @@ const removeTracker = () => {
   const tracker = internalState.indicatorEl
   if (!tracker) return
 
-  enableTransition()
+  enableTransitions()
   tracker.style.opacity = '0'
   assignTransform(tracker, { scale: '2' })
 }
