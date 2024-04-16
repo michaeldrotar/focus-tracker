@@ -8,4 +8,4 @@ See the video demonstration below.
 
 For specific implementations, check the nested packages:
 
-- [focus-tracker-js](https://github.com/michaeldrotar/focus-tracker/tree/main/packages/focus-tracker-js)
+- [focus-tracker-js](packages/focus-tracker-js)
