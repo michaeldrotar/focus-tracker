@@ -10,6 +10,7 @@ import { addDocumentEventHandlers, removeDocumentEventHandlers } from './events'
 import { createFocusTrackerIndicator } from './createFocusTrackerIndicator'
 import { disableTransitions, enableTransitions } from './transitions'
 import { Rect, assignRect, getElementRect, rectsDiffer } from './rects'
+import { assignTransform } from './transforms'
 
 /*
   focusTracker.register(document.body, { attrPrefix: 'data-focus-tracker'})
@@ -17,45 +18,6 @@ import { Rect, assignRect, getElementRect, rectsDiffer } from './rects'
   focusTracker.watch('button', { style: { color: 'red' } })
   focusTracker.start()
 */
-
-type Transform = { x?: string; y?: string; scale?: string }
-
-const getTransform = (element: HTMLElement): Transform => {
-  const style = getComputedStyle(element)
-  const transformStrings = style.transform.match(/\w+\([^\)]+\)/g)
-  if (!transformStrings) return {}
-  return transformStrings.reduce((transform, value) => {
-    const [key, ...values] = value.split(/\(|,|\)/)
-    if (key === 'matrix') {
-      // only need scale and translate
-      transform.scale = values[0]
-      transform.x = values[4]?.trim() + 'px'
-      transform.y = values[5]?.trim() + 'px'
-    } else if (key === 'translate') {
-      transform.x = values[0]
-      transform.y = values[1]
-    } else if (key === 'scale') {
-      transform.scale = values[0]
-    }
-    return transform
-  }, {} as Transform)
-}
-
-const setTransform = (element: HTMLElement, transform: Transform) => {
-  const transforms = []
-  if (transform.x || transform.y) {
-    transforms.push(`translate(${transform.x ?? 0}, ${transform.y ?? 0})`)
-  }
-  if (transform.scale) {
-    transforms.push(`scale(${transform.scale})`)
-  }
-  element.style.transform = transforms.join(' ')
-}
-
-const assignTransform = (element: HTMLElement, transform: Transform) => {
-  const currentTransform = getTransform(element)
-  setTransform(element, { ...currentTransform, ...transform })
-}
 
 let lastTarget: HTMLElement | undefined
 // let lastParent: HTMLElement | undefined
