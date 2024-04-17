@@ -5,10 +5,12 @@ import { getStackingParent } from './getStackingParent/getStackingParent'
 import { getVisuallyFocusedElement } from './getVisuallyFocusedElement/getVisuallyFocusedElement'
 import { FocusTrackerConfiguration } from './types/FocusTrackerConfiguration'
 import { register, unregister } from './registrations'
-
 import { applyConfiguration } from './configurations'
 import { addDocumentEventHandlers, removeDocumentEventHandlers } from './events'
 import { createFocusTrackerIndicator } from './createFocusTrackerIndicator'
+import { disableTransitions, enableTransitions } from './transitions'
+import { Rect, assignRect, getElementRect, rectsDiffer } from './rects'
+import { assignTransform } from './transforms'
 
 /*
   focusTracker.register(document.body, { attrPrefix: 'data-focus-tracker'})
@@ -16,110 +18,6 @@ import { createFocusTrackerIndicator } from './createFocusTrackerIndicator'
   focusTracker.watch('button', { style: { color: 'red' } })
   focusTracker.start()
 */
-
-const disableTransition = () => {
-  const tracker = internalState.indicatorEl
-  const container = internalState.containerEl
-  if (!tracker || !container) return
-  tracker.style.transition = 'none'
-  container.style.transition = 'none'
-}
-const enableTransition = () => {
-  const tracker = internalState.indicatorEl
-  const container = internalState.containerEl
-  if (!tracker || !container) return
-  tracker.style.transition = 'ease-in-out all 200ms'
-  container.style.transition = 'ease-in-out all 200ms'
-}
-
-type Rect = {
-  x: number
-  y: number
-  width: number
-  height: number
-  radius: string
-}
-const getElementRect = (element: HTMLElement): Rect => {
-  const rect = element.getBoundingClientRect()
-  const style = getComputedStyle(element)
-  return {
-    x: rect.x,
-    y: rect.y,
-    width: rect.width,
-    height: rect.height,
-    radius: style.borderRadius,
-  }
-}
-
-const rectsDiffer = (rectA: Rect, rectB: Rect) => {
-  return (
-    rectA.x !== rectB.x ||
-    rectA.y !== rectB.y ||
-    rectA.width !== rectB.width ||
-    rectA.height !== rectB.height ||
-    rectA.radius !== rectB.radius
-  )
-}
-
-type Transform = { x?: string; y?: string; scale?: string }
-
-const getTransform = (element: HTMLElement): Transform => {
-  const style = getComputedStyle(element)
-  const transformStrings = style.transform.match(/\w+\([^\)]+\)/g)
-  if (!transformStrings) return {}
-  return transformStrings.reduce((transform, value) => {
-    const [key, ...values] = value.split(/\(|,|\)/)
-    if (key === 'matrix') {
-      // only need scale and translate
-      transform.scale = values[0]
-      transform.x = values[4]?.trim() + 'px'
-      transform.y = values[5]?.trim() + 'px'
-    } else if (key === 'translate') {
-      transform.x = values[0]
-      transform.y = values[1]
-    } else if (key === 'scale') {
-      transform.scale = values[0]
-    }
-    return transform
-  }, {} as Transform)
-}
-
-const setTransform = (element: HTMLElement, transform: Transform) => {
-  const transforms = []
-  if (transform.x || transform.y) {
-    transforms.push(`translate(${transform.x ?? 0}, ${transform.y ?? 0})`)
-  }
-  if (transform.scale) {
-    transforms.push(`scale(${transform.scale})`)
-  }
-  element.style.transform = transforms.join(' ')
-}
-
-const assignTransform = (element: HTMLElement, transform: Transform) => {
-  const currentTransform = getTransform(element)
-  setTransform(element, { ...currentTransform, ...transform })
-}
-
-const assignRect = (
-  element: HTMLElement,
-  rect: Rect,
-  {
-    addWindow,
-    relativeTo,
-    transform,
-  }: { addWindow?: boolean; relativeTo?: Rect; transform?: string } = {},
-) => {
-  const x =
-    rect.x + (addWindow ? window.scrollX : 0) - (relativeTo ? relativeTo.x : 0)
-  const y =
-    rect.y + (addWindow ? window.scrollY : 0) - (relativeTo ? relativeTo.y : 0)
-  element.style.left = `0`
-  element.style.top = `0`
-  element.style.transform = `translate(${x}px, ${y}px) ${transform || ''}`
-  element.style.width = `${rect.width}px`
-  element.style.height = `${rect.height}px`
-  element.style.borderRadius = rect.radius
-}
 
 let lastTarget: HTMLElement | undefined
 // let lastParent: HTMLElement | undefined
@@ -151,12 +49,12 @@ const updateTracker = (
   }
 
   if (targetChanged) {
-    enableTransition()
+    enableTransitions()
     assignRect(tracker, targetRect, { relativeTo: parentRect })
 
     applyConfiguration(tracker, configuration)
   } else if (targetRectChanged) {
-    disableTransition()
+    disableTransitions()
     assignRect(tracker, targetRect, { relativeTo: parentRect })
   }
 
@@ -189,10 +87,10 @@ const addTracker = (
 
   tracker.style.opacity = '0'
   // assignTransform(tracker, { scale: '2' })
-  disableTransition()
+  disableTransitions()
 
   window.requestAnimationFrame(() => {
-    enableTransition()
+    enableTransitions()
     tracker.style.opacity = '1'
     assignTransform(tracker, { scale: '1' })
   })
@@ -202,7 +100,7 @@ const removeTracker = () => {
   const tracker = internalState.indicatorEl
   if (!tracker) return
 
-  enableTransition()
+  enableTransitions()
   tracker.style.opacity = '0'
   assignTransform(tracker, { scale: '2' })
 }
