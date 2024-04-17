@@ -5,11 +5,11 @@ import { getStackingParent } from './getStackingParent/getStackingParent'
 import { getVisuallyFocusedElement } from './getVisuallyFocusedElement/getVisuallyFocusedElement'
 import { FocusTrackerConfiguration } from './types/FocusTrackerConfiguration'
 import { register, unregister } from './registrations'
-
 import { applyConfiguration } from './configurations'
 import { addDocumentEventHandlers, removeDocumentEventHandlers } from './events'
 import { createFocusTrackerIndicator } from './createFocusTrackerIndicator'
 import { disableTransitions, enableTransitions } from './transitions'
+import { Rect, assignRect, getElementRect, rectsDiffer } from './rects'
 
 /*
   focusTracker.register(document.body, { attrPrefix: 'data-focus-tracker'})
@@ -17,35 +17,6 @@ import { disableTransitions, enableTransitions } from './transitions'
   focusTracker.watch('button', { style: { color: 'red' } })
   focusTracker.start()
 */
-
-type Rect = {
-  x: number
-  y: number
-  width: number
-  height: number
-  radius: string
-}
-const getElementRect = (element: HTMLElement): Rect => {
-  const rect = element.getBoundingClientRect()
-  const style = getComputedStyle(element)
-  return {
-    x: rect.x,
-    y: rect.y,
-    width: rect.width,
-    height: rect.height,
-    radius: style.borderRadius,
-  }
-}
-
-const rectsDiffer = (rectA: Rect, rectB: Rect) => {
-  return (
-    rectA.x !== rectB.x ||
-    rectA.y !== rectB.y ||
-    rectA.width !== rectB.width ||
-    rectA.height !== rectB.height ||
-    rectA.radius !== rectB.radius
-  )
-}
 
 type Transform = { x?: string; y?: string; scale?: string }
 
@@ -84,27 +55,6 @@ const setTransform = (element: HTMLElement, transform: Transform) => {
 const assignTransform = (element: HTMLElement, transform: Transform) => {
   const currentTransform = getTransform(element)
   setTransform(element, { ...currentTransform, ...transform })
-}
-
-const assignRect = (
-  element: HTMLElement,
-  rect: Rect,
-  {
-    addWindow,
-    relativeTo,
-    transform,
-  }: { addWindow?: boolean; relativeTo?: Rect; transform?: string } = {},
-) => {
-  const x =
-    rect.x + (addWindow ? window.scrollX : 0) - (relativeTo ? relativeTo.x : 0)
-  const y =
-    rect.y + (addWindow ? window.scrollY : 0) - (relativeTo ? relativeTo.y : 0)
-  element.style.left = `0`
-  element.style.top = `0`
-  element.style.transform = `translate(${x}px, ${y}px) ${transform || ''}`
-  element.style.width = `${rect.width}px`
-  element.style.height = `${rect.height}px`
-  element.style.borderRadius = rect.radius
 }
 
 let lastTarget: HTMLElement | undefined
