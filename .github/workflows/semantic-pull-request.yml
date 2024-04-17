@@ -1,7 +1,5 @@
 # Source: https://github.com/amannn/action-semantic-pull-request
 
-name: Semantic Pull Request Workflow
-
 permissions:
   pull-requests: read
 
@@ -14,7 +12,6 @@ on:
 
 jobs:
   main:
-    name: Semantic Pull Request Job
     runs-on: ubuntu-latest
     steps:
       - name: Validate PR title
