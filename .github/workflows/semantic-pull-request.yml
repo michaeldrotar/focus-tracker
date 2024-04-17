@@ -1,5 +1,7 @@
 # Source: https://github.com/amannn/action-semantic-pull-request
 
+name: Semantic Pull Request
+
 permissions:
   pull-requests: read
 
