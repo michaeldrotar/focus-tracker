@@ -1,6 +1,6 @@
 {
   "name": "@michaeldrotar/react-focus-tracker",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Enhances focus tracking with transitions and customization to make the experience more accessible for users and easier for developers.",
   "keywords": [
     "accessibility",
@@ -18,7 +18,7 @@
     "lint": "eslint . --fix --max-warnings 0"
   },
   "dependencies": {
-    "@michaeldrotar/focus-tracker-js": "0.1.2"
+    "@michaeldrotar/focus-tracker-js": "0.2.0"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",
