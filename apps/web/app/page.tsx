@@ -6,6 +6,7 @@ import FocusTrackerImportSetup from './FocusTrackerImportSetup'
 import { Button } from '@repo/ui/button'
 import { StandardFocusSetup } from './StandardFocusSetup'
 import ReactFocusTrackerSetup from './ReactFocusTrackerSetup'
+import { FocusTrackerRegistration } from '@michaeldrotar/react-focus-tracker'
 
 function Gradient({
   conic,
@@ -134,11 +135,9 @@ export default function Page(): JSX.Element {
       </div>
       <div className={styles.grid}>
         {LINKS.map(({ title, href, description }, index) => (
-          <Card
-            className={styles.card}
-            href={href}
+          <FocusTrackerRegistration
             key={title}
-            title={title}
+            boxShadow="currentColor 0px 0px 8px 4px"
             color={
               [
                 '#e92a67',
@@ -147,9 +146,12 @@ export default function Page(): JSX.Element {
                 '#2a8af6',
               ][index]
             }
+            thickness={3}
           >
-            {description}
-          </Card>
+            <Card className={styles.card} href={href} title={title}>
+              {description}
+            </Card>
+          </FocusTrackerRegistration>
         ))}
       </div>
       <StandardFocusSetup />
