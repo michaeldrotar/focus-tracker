@@ -1,4 +1,4 @@
-# React Focus Tracker [WIP]
+# React Focus Tracker
 
 [![NPM Version](https://img.shields.io/npm/v/%40michaeldrotar%2Freact-focus-tracker.svg?style=flat)](https://www.npmjs.com/package/@michaeldrotar/react-focus-tracker)
 [![NPM License](https://img.shields.io/npm/l/%40michaeldrotar%2Freact-focus-tracker.svg?style=flat)](https://github.com/michaeldrotar/focus-tracker/blob/main/LICENSE)

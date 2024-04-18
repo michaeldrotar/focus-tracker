@@ -1,4 +1,4 @@
-# Focus Tracker [WIP]
+# Focus Tracker
 
 Enhances focus tracking with transitions and customization to make the experience more accessible for users and easier for developers.
 

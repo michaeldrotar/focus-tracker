@@ -1,4 +1,4 @@
-# focus-tracker-js [WIP]
+# focus-tracker-js
 
 [![NPM Version](https://img.shields.io/npm/v/%40michaeldrotar%2Ffocus-tracker-js.svg?style=flat)](https://www.npmjs.com/package/@michaeldrotar/focus-tracker-js)
 [![NPM License](https://img.shields.io/npm/l/%40michaeldrotar%2Ffocus-tracker-js.svg?style=flat)](https://github.com/michaeldrotar/focus-tracker/blob/main/LICENSE)
