@@ -1,3 +1,3 @@
-import { focusTracker } from '@michaeldrotar/focus-tracker-js'
+import { FocusTrackerRegistration } from './FocusTrackerRegistration'
 
-export { focusTracker }
+export { FocusTrackerRegistration }

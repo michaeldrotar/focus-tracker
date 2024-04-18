@@ -5,6 +5,7 @@ import styles from './page.module.css'
 import FocusTrackerImportSetup from './FocusTrackerImportSetup'
 import { Button } from '@repo/ui/button'
 import { StandardFocusSetup } from './StandardFocusSetup'
+import ReactFocusTrackerSetup from './ReactFocusTrackerSetup'
 
 function Gradient({
   conic,
@@ -79,11 +80,9 @@ export default function Page(): JSX.Element {
           </a>
         </div>
       </div>
-
       <Button appName="web" className={styles.button}>
         Click me!
       </Button>
-
       <div className={styles.hero}>
         <div className={styles.heroContent}>
           <div className={styles.logos}>
@@ -133,7 +132,6 @@ export default function Page(): JSX.Element {
           </div>
         </div>
       </div>
-
       <div className={styles.grid}>
         {LINKS.map(({ title, href, description }, index) => (
           <Card
@@ -156,6 +154,7 @@ export default function Page(): JSX.Element {
       </div>
       <StandardFocusSetup />
       <FocusTrackerImportSetup />
+      <ReactFocusTrackerSetup />
     </main>
   )
 }
