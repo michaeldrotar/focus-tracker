@@ -2,7 +2,6 @@ import { internalState } from './internalState'
 import { baseConfiguration } from './baseConfiguration'
 import { getElementConfiguration } from './getElementConfiguration'
 import { getStackingParent } from './getStackingParent/getStackingParent'
-import { getVisuallyFocusedElement } from './getVisuallyFocusedElement/getVisuallyFocusedElement'
 import { FocusTrackerConfiguration } from './types/FocusTrackerConfiguration'
 import { register, unregister } from './registrations'
 import { applyConfiguration } from './configurations'
@@ -11,6 +10,7 @@ import { createFocusTrackerIndicator } from './createFocusTrackerIndicator'
 import { disableTransitions, enableTransitions } from './transitions'
 import { Rect, assignRect, getElementRect, rectsDiffer } from './rects'
 import { assignTransform } from './transforms'
+import { getFocusedElement } from './getFocusedElement/getFocusedElement'
 
 /*
   focusTracker.register(document.body, { attrPrefix: 'data-focus-tracker'})
@@ -52,6 +52,7 @@ const updateTracker = (
   }
 
   if (targetChanged) {
+    console.log(configuration)
     enableTransitions()
     assignRect(tracker, targetRect, { relativeTo: parentRect })
   } else if (targetRectChanged) {
@@ -114,26 +115,29 @@ const removeTracker = () => {
 
 const updateFocus = () => {
   if (internalState.isKeyboard) {
-    const focusedElement = getVisuallyFocusedElement()
+    const focusedElement = getFocusedElement()
     if (!focusedElement) {
       if (internalState.target) {
         removeTracker()
         internalState.target = undefined
       }
     } else {
-      const configuration = getElementConfiguration(focusedElement)
-      if (!configuration) {
+      const response = getElementConfiguration(focusedElement)
+      if (!response) {
         if (internalState.target) {
           removeTracker()
           internalState.target = undefined
         }
-      } else if (!internalState.target) {
-        addTracker(focusedElement, configuration)
-        internalState.target = focusedElement
       } else {
-        updateTracker(focusedElement, configuration)
-        if (internalState.target !== focusedElement) {
-          internalState.target = focusedElement
+        const { configuration, target } = response
+        if (!internalState.target) {
+          addTracker(target, configuration)
+          internalState.target = target
+        } else {
+          updateTracker(target, configuration)
+          if (internalState.target !== target) {
+            internalState.target = target
+          }
         }
       }
     }

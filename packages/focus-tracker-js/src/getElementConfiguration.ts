@@ -4,9 +4,12 @@ import { registrations } from './registrations'
 
 export function getElementConfiguration(
   element: HTMLElement,
-): FocusTrackerConfiguration | undefined {
+):
+  | { configuration: FocusTrackerConfiguration; target: HTMLElement }
+  | undefined {
   let hasRegistration = false
   let partialConfiguration: Partial<FocusTrackerConfiguration> = {}
+  let target: HTMLElement | undefined
   // find self or parent element that has data-focus-tracker--parent attribute defined
   let currentElement: HTMLElement | null = element
   while (currentElement) {
@@ -16,11 +19,13 @@ export function getElementConfiguration(
     if (registration) {
       hasRegistration = true
       if (registration.configuration) {
-        if (
-          !partialConfiguration.target &&
-          registration.configuration.target === 'self'
-        ) {
-          partialConfiguration.target = currentElement
+        if (!target) {
+          if (registration.configuration.target === 'self')
+            target = currentElement
+          else if (registration.configuration.target === 'target')
+            target = element
+          else if (registration.configuration.target instanceof HTMLElement)
+            target = registration.configuration.target
         }
         for (const [key, value] of Object.entries(registration.configuration)) {
           // @ts-ignore
@@ -34,5 +39,7 @@ export function getElementConfiguration(
     currentElement = currentElement.parentElement
   }
   if (!hasRegistration) return undefined
-  return { ...baseConfiguration, ...partialConfiguration }
+  const configuration = { ...baseConfiguration, ...partialConfiguration }
+  if (!target) target = element
+  return { configuration, target }
 }
