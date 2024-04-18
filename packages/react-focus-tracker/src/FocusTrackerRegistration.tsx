@@ -33,23 +33,21 @@ export function FocusTrackerRegistration(props: FocusTrackerRegistrationProps) {
   )
 
   useEffect(() => {
-    console.log(
-      'child',
-      ref,
-      refProperty ? child.props[refProperty] : child.ref,
-      Object.keys(child),
-      Object.keys(child.props),
-    )
     if (!ref.current) return
-
-    focusTracker.register(ref.current, props)
+    focusTracker.register(ref.current, {
+      boxShadow: props.boxShadow,
+      color: props.color,
+      offset: props.offset,
+      target: props.target,
+      thickness: props.thickness,
+    })
   }, [
     ref,
     props.boxShadow,
     props.color,
-    props.thickness,
     props.offset,
     props.target,
+    props.thickness,
   ])
 
   // const child = Children.only(props.children)
