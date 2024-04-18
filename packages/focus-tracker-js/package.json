@@ -1,6 +1,6 @@
 {
   "name": "@michaeldrotar/focus-tracker-js",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Enhances focus tracking with transitions and customization to make the experience more accessible for users and easier for developers.",
   "keywords": [
     "accessibility",

@@ -1,5 +1,13 @@
 # @michaeldrotar/react-focus-tracker
 
+## 0.2.1
+
+### Patch Changes
+
+- 7294d8a: Remove WIP indicators
+- Updated dependencies [7294d8a]
+  - @michaeldrotar/focus-tracker-js@0.2.2
+
 ## 0.2.0
 
 ### Minor Changes

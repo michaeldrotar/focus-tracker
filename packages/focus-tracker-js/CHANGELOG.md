@@ -1,5 +1,11 @@
 # @michaeldrotar/focus-tracker-js
 
+## 0.2.2
+
+### Patch Changes
+
+- 7294d8a: Remove WIP indicators
+
 ## 0.2.1
 
 ### Patch Changes
