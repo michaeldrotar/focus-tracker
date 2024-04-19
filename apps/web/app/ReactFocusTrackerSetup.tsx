@@ -1,13 +1,13 @@
 import { TestComponents } from './TestComponents'
-import { FocusTrackerRegistration } from '@michaeldrotar/react-focus-tracker/FocusTrackerRegistration'
+import { FocusTracker } from './FocusTracker'
 
 export default function ReactFocusTrackerSetup() {
   return (
     <>
       <h2>ReactFocusTracker</h2>
-      <FocusTrackerRegistration refProperty="rootRef">
+      <FocusTracker refProperty="rootRef">
         <TestComponents />
-      </FocusTrackerRegistration>
+      </FocusTracker>
     </>
   )
 }

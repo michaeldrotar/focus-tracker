@@ -1,5 +1,3 @@
-'use client'
-
 import {
   FocusTrackerConfiguration,
   focusTracker,
@@ -50,7 +48,5 @@ export function FocusTrackerRegistration(props: FocusTrackerRegistrationProps) {
     props.thickness,
   ])
 
-  // const child = Children.only(props.children)
-  // const clone = cloneElement(child, { ref: ref })
   return clone
 }
