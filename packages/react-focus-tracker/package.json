@@ -10,11 +10,19 @@
   "license": "MIT",
   "author": "Michael Drotar",
   "exports": {
-    ".": "./src/index.ts",
-    "./FocusTrackerRegistration": "./src/FocusTrackerRegistration.tsx"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./FocusTrackerRegistration": {
+      "types": "./dist/FocusTrackerRegistration.d.ts",
+      "import": "./dist/FocusTrackerRegistration.mjs",
+      "require": "./dist/FocusTrackerRegistration.js"
+    }
   },
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "build": "tsup",
     "dev": "npm run build -- --watch",
     "lint": "eslint . --fix --max-warnings 0"
   },
@@ -36,6 +44,13 @@
   "peerDependencies": {
     "react": "^18.0.0"
   },
+  "ex_exports": {
+    ".": "./src/index.ts",
+    "./FocusTrackerRegistration": "./src/FocusTrackerRegistration.tsx"
+  },
+  "ex_files": [
+    "dist"
+  ],
   "ex_main": "./dist/index.js",
   "ex_module": "./dist/index.mjs",
   "ex_types": "./dist/index.d.ts"
