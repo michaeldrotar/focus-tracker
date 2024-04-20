@@ -1,5 +1,11 @@
 # @michaeldrotar/react-focus-tracker
 
+## 0.2.2
+
+### Patch Changes
+
+- b551372: Fix Next.js App Router import
+
 ## 0.2.1
 
 ### Patch Changes
