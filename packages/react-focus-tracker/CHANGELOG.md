@@ -1,5 +1,17 @@
 # @michaeldrotar/react-focus-tracker
 
+## 0.3.0
+
+### Minor Changes
+
+- 8c78796: Remove start and stop methods, automate the functionality based on registrations
+
+### Patch Changes
+
+- Updated dependencies [8c78796]
+- Updated dependencies [6a0f932]
+  - @michaeldrotar/focus-tracker-js@0.3.0
+
 ## 0.2.2
 
 ### Patch Changes

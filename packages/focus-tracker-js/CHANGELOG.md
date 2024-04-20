@@ -1,5 +1,15 @@
 # @michaeldrotar/focus-tracker-js
 
+## 0.3.0
+
+### Minor Changes
+
+- 8c78796: Remove start and stop methods, automate the functionality based on registrations
+
+### Patch Changes
+
+- 6a0f932: Fix unregister to re-enable default focus styles
+
 ## 0.2.2
 
 ### Patch Changes
