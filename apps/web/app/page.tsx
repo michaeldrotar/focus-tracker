@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import { Card } from '@repo/ui/card'
 import { Code } from '@repo/ui/code'
+import { Button } from '@repo/ui/button'
 import styles from './page.module.css'
 import FocusTrackerImportSetup from './FocusTrackerImportSetup'
-import { Button } from '@repo/ui/button'
 import { StandardFocusSetup } from './StandardFocusSetup'
 import ReactFocusTrackerSetup from './ReactFocusTrackerSetup'
 import { FocusTracker } from './FocusTracker'
@@ -92,8 +92,8 @@ export default function Page(): JSX.Element {
                 alt=""
                 height={614}
                 src="circles.svg"
-                width={614}
                 style={{ pointerEvents: 'none' }}
+                width={614}
               />
             </div>
             <div className={styles.logoGradientContainer}>
@@ -106,8 +106,8 @@ export default function Page(): JSX.Element {
                 height={120}
                 priority
                 src="turborepo.svg"
-                width={120}
                 style={{ pointerEvents: 'none' }}
+                width={120}
               />
             </div>
           </div>
@@ -136,7 +136,6 @@ export default function Page(): JSX.Element {
       <div className={styles.grid}>
         {LINKS.map(({ title, href, description }, index) => (
           <FocusTracker
-            key={title}
             boxShadow="currentColor 0px 0px 8px 4px"
             color={
               [
@@ -146,6 +145,7 @@ export default function Page(): JSX.Element {
                 '#2a8af6',
               ][index]
             }
+            key={title}
             thickness={3}
           >
             <Card className={styles.card} href={href} title={title}>

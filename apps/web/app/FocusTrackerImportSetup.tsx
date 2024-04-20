@@ -1,8 +1,8 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { TestComponents } from './TestComponents'
 import { focusTracker } from '@michaeldrotar/focus-tracker-js'
+import { TestComponents } from './TestComponents'
 
 export default function FocusTrackerImportSetup() {
   const componentsRef = useRef<HTMLDivElement>(null)

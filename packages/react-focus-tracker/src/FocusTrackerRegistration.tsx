@@ -1,11 +1,8 @@
-import {
-  FocusTrackerConfiguration,
-  focusTracker,
-} from '@michaeldrotar/focus-tracker-js'
+import type { FocusTrackerConfiguration } from '@michaeldrotar/focus-tracker-js'
+import { focusTracker } from '@michaeldrotar/focus-tracker-js'
+import type { ReactElement, Ref } from 'react'
 import {
   Children,
-  ReactElement,
-  Ref,
   cloneElement,
   useEffect,
   useImperativeHandle,
@@ -14,21 +11,24 @@ import {
 
 export type FocusTrackerRegistrationProps =
   Partial<FocusTrackerConfiguration> & {
-    children: ReactElement & { ref?: Ref<unknown> }
+    children: ReactElement & { ref?: Ref<HTMLElement> }
     refProperty?: string
   }
 
-export function FocusTrackerRegistration(props: FocusTrackerRegistrationProps) {
+export function FocusTrackerRegistration(
+  props: FocusTrackerRegistrationProps,
+): JSX.Element {
   const ref = useRef<HTMLElement>(null)
   const child = Children.only(props.children)
   const refProperty = props.refProperty
   const clone = cloneElement(child, { [refProperty || 'ref']: ref })
 
-  useImperativeHandle(
-    refProperty ? child.props[refProperty] : child.ref,
-    () => ref.current!,
-    [ref, refProperty, child],
-  )
+  const childRef = refProperty
+    ? // eslint-disable-next-line -- not sure how to type it but it works
+      (child.props[refProperty] as Ref<HTMLElement>)
+    : child.ref
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- it works
+  useImperativeHandle(childRef, () => ref.current!, [])
 
   useEffect(() => {
     if (!ref.current) return

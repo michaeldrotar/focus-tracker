@@ -1,8 +1,9 @@
 'use client'
 
-import { RefObject, useId } from 'react'
+import type { RefObject } from 'react'
+import { useId } from 'react'
 
-export type TestComponentsProps = {
+export interface TestComponentsProps {
   rootRef?: RefObject<HTMLDivElement>
 }
 
@@ -15,7 +16,7 @@ export function TestComponents({ rootRef }: TestComponentsProps) {
     >
       <div>
         <label htmlFor={`${id}-text`}>Text Input</label>
-        <input type="text" id={`${id}-text`} style={{ width: '250px' }} />
+        <input id={`${id}-text`} style={{ width: '250px' }} type="text" />
       </div>
       <div>
         <label htmlFor={`${id}-dropdown`}>Dropdown</label>
@@ -29,9 +30,9 @@ export function TestComponents({ rootRef }: TestComponentsProps) {
           return (
             <div key={num}>
               <input
-                type="checkbox"
-                name={`${id}-checkbox`}
                 id={`${id}-checkbox-${num}`}
+                name={`${id}-checkbox`}
+                type="checkbox"
               />
               <label htmlFor={`${id}-checkbox-${num}`}>Checkbox {num}</label>
             </div>
@@ -43,9 +44,9 @@ export function TestComponents({ rootRef }: TestComponentsProps) {
           return (
             <div key={num}>
               <input
-                type="radio"
-                name={`${id}-radio`}
                 id={`${id}-radio-${num}`}
+                name={`${id}-radio`}
+                type="radio"
               />
               <label htmlFor={`${id}-radio-${num}`}>Radio {num}</label>
             </div>
@@ -74,8 +75,8 @@ export function TestComponents({ rootRef }: TestComponentsProps) {
         >
           <input
             className="foo"
-            type="text"
             style={{ position: 'absolute', right: '0' }}
+            type="text"
           />
         </div>
       </div>

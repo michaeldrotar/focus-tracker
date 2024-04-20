@@ -1,5 +1,4 @@
 const { resolve } = require('node:path')
-
 const project = resolve(process.cwd(), 'tsconfig.json')
 
 /** @type {import("eslint").Linter.Config} */
@@ -21,15 +20,12 @@ module.exports = {
     },
   },
   rules: {
+    'import/no-default-export': 'off',
     'no-useless-escape': 'off',
+    'unicorn/filename-case': 'off',
     'unused-imports/no-unused-imports': 'error',
   },
-  ignorePatterns: [
-    // Ignore dotfiles
-    '.*.js',
-    'node_modules/',
-    'dist/',
-  ],
+  ignorePatterns: ['.*.js', 'node_modules/', 'dist/'],
   overrides: [
     {
       files: ['*.js?(x)', '*.ts?(x)'],
