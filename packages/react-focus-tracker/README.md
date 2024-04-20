@@ -64,7 +64,7 @@ The configuration object allows customization of how your focus tracker looks. T
 
 ### FocusTrackerRegistration(configuration: FocusTrackerConfiguration)
 
-For most users, wrap this component around the `<body>` use the `configuration` to customize how your focus tracker should look.
+For most users, wrap this component around the `<body>` and use the `configuration` to customize how your focus tracker should look.
 
 ```tsx
 return (

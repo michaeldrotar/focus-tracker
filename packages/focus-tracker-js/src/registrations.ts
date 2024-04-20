@@ -1,4 +1,9 @@
-import { disableDefaultFocusStyles } from './defaultFocusStyles'
+import {
+  disableDefaultFocusStyles,
+  reenableDefaultFocusStyles,
+} from './defaultFocusStyles'
+import { startTracking } from './startTracking'
+import { stopTracking } from './stopTracking'
 import { FocusTrackerConfiguration } from './types/FocusTrackerConfiguration'
 
 export type Registration = {
@@ -15,9 +20,10 @@ export function register(
   element: HTMLElement,
   configuration?: Partial<FocusTrackerConfiguration>,
 ) {
-  disableDefaultFocusStyles(element)
   unregister(element)
+  disableDefaultFocusStyles(element)
   registrations.push({ element, configuration })
+  if (registrations.length === 1) startTracking()
 }
 
 /**
@@ -27,8 +33,10 @@ export function unregister(element: HTMLElement) {
   for (let index = 0; index < registrations.length; index++) {
     const registration = registrations[index]
     if (registration && registration.element === element) {
+      reenableDefaultFocusStyles(element)
       registrations.splice(index, 1)
       break
     }
   }
+  if (registrations.length === 0) stopTracking()
 }

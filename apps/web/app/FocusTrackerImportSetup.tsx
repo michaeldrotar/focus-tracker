@@ -10,7 +10,6 @@ export default function FocusTrackerImportSetup() {
     if (!componentsRef.current) return
     const componentsEl = componentsRef.current
     focusTracker.register(componentsEl)
-    focusTracker.start()
     return () => {
       focusTracker.unregister(componentsEl)
     }

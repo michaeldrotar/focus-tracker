@@ -32,13 +32,17 @@ export function FocusTrackerRegistration(
 
   useEffect(() => {
     if (!ref.current) return
-    focusTracker.register(ref.current, {
+    const element = ref.current
+    focusTracker.register(element, {
       boxShadow: props.boxShadow,
       color: props.color,
       offset: props.offset,
       target: props.target,
       thickness: props.thickness,
     })
+    return () => {
+      focusTracker.unregister(element)
+    }
   }, [
     ref,
     props.boxShadow,

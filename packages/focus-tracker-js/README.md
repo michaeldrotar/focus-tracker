@@ -67,21 +67,11 @@ focusTracker.register(document.body, {
 
 Check advanced use cases for more.
 
-### start()
+### unregister(element: HTMLElement)
 
-Once registrations are defined, the server must be explicitly started.
+Elements may be unregistered to return to using default focus.
 
-```ts
-focusTracker.start()
-```
-
-### stop()
-
-The service may also be stopped at any time.
-
-```
-focusTracker.stop()
-```
+If an element is removed from the DOM, it should be unregistered to clean up the event handlers and memory usage.
 
 ## Advanced Use Cases
 
