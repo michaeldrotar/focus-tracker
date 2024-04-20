@@ -52,7 +52,6 @@ const updateTracker = (
   }
 
   if (targetChanged) {
-    console.log(configuration)
     enableTransitions()
     assignRect(tracker, targetRect, { relativeTo: parentRect })
   } else if (targetRectChanged) {
