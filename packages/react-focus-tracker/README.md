@@ -28,7 +28,24 @@ bun add @michaeldrotar/react-focus-tracker
 Import into your code
 
 ```ts
-import { FocusTrackerRegister } from '@michaeldrotar/react-focus-tracker'
+import { FocusTrackerRegistration } from '@michaeldrotar/react-focus-tracker/FocusTrackerRegistration'
+```
+
+## Next.js App Router
+
+If the component is used directly, Next.js may throw an error that it's not a client component. It is recommended to create a small wrapper around it to fix this.
+
+```tsx
+'use client'
+
+import {
+  FocusTrackerRegistration,
+  FocusTrackerRegistrationProps,
+} from '@michaeldrotar/react-focus-tracker/FocusTrackerRegistration'
+
+export function FocusTracker(props: FocusTrackerRegistrationProps) {
+  return <FocusTrackerRegistration {...props} />
+}
 ```
 
 ## Usage
@@ -45,15 +62,15 @@ The configuration object allows customization of how your focus tracker looks. T
 | target    | `'self' \| 'target' \| HTMLElement` | Sets where the focus tracker's indicator will be positioned. By default, uses `'target'` as the target of the focus event. May use `'self'` for nested configurations so children show focus on itself, or may pass any other element.                                    |
 | thickness | `string \| number`                  | Sets how thick the focus tracker's outline should be. By default, uses the browser's default thickness. A string may be used to include css units like `"0.1rem"` or `"3px"`.                                                                                             |
 
-### FocusTrackerRegister(configuration: FocusTrackerConfiguration)
+### FocusTrackerRegistration(configuration: FocusTrackerConfiguration)
 
 For most users, wrap this component around the `<body>` use the `configuration` to customize how your focus tracker should look.
 
 ```tsx
 return (
-  <FocusTrackerRegister color="#0ea5e9" thickness={3}>
+  <FocusTrackerRegistration color="#0ea5e9" thickness={3}>
     <body>...</body>
-  </FocusTrackerRegister>
+  </FocusTrackerRegistration>
 )
 ```
 
