@@ -1,4 +1,4 @@
-import { register, unregister } from './registrations'
+import { register, unregister } from './internal/registrations'
 
 const focusTracker = {
   register,
@@ -18,4 +18,4 @@ if (typeof window !== 'undefined' && !window.focusTracker) {
 }
 
 export { focusTracker }
-export type { FocusTrackerConfiguration } from './types/FocusTrackerConfiguration'
+export type { FocusTrackerConfiguration } from './internal/FocusTrackerConfiguration'

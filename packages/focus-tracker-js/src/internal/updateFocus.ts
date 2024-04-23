@@ -1,6 +1,6 @@
 import { addTracker } from './addTracker'
 import { getElementConfiguration } from './getElementConfiguration'
-import { getFocusedElement } from './getFocusedElement/getFocusedElement'
+import { getFocusedElement } from './getFocusedElement'
 import { internalState } from './internalState'
 import { removeTracker } from './removeTracker'
 import { updateTracker } from './updateTracker'

@@ -1,4 +1,4 @@
-import { FocusTrackerConfiguration } from './types/FocusTrackerConfiguration'
+import { FocusTrackerConfiguration } from './FocusTrackerConfiguration'
 
 export const baseConfiguration: FocusTrackerConfiguration = {
   boxShadow: 'none',

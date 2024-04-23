@@ -4,7 +4,7 @@ import {
 } from './defaultFocusStyles'
 import { startTracking } from './startTracking'
 import { stopTracking } from './stopTracking'
-import { FocusTrackerConfiguration } from './types/FocusTrackerConfiguration'
+import { FocusTrackerConfiguration } from './FocusTrackerConfiguration'
 
 export type Registration = {
   element: HTMLElement

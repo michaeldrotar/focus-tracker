@@ -1,6 +1,6 @@
 import { internalState } from './internalState'
-import { getStackingParent } from './getStackingParent/getStackingParent'
-import { FocusTrackerConfiguration } from './index'
+import { getStackingParent } from './getStackingParent'
+import { FocusTrackerConfiguration } from '../index'
 import { applyConfiguration } from './configurations'
 import { disableTransitions, enableTransitions } from './transitions'
 import { assignRect, getElementRect } from './rects'

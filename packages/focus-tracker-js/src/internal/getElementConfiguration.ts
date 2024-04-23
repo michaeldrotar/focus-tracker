@@ -1,4 +1,4 @@
-import { FocusTrackerConfiguration } from '.'
+import { FocusTrackerConfiguration } from '..'
 import { baseConfiguration } from './baseConfiguration'
 import { registrations } from './registrations'
 

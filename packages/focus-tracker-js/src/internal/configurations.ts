@@ -1,4 +1,4 @@
-import { FocusTrackerConfiguration } from './types/FocusTrackerConfiguration'
+import { FocusTrackerConfiguration } from './FocusTrackerConfiguration'
 
 function toUnit(value: string | number, defaultUnit: string): string {
   return typeof value === 'string' ? value : `${value}${defaultUnit}`
