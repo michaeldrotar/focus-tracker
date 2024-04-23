@@ -1,5 +1,6 @@
-import type { FocusTrackerConfiguration } from '@michaeldrotar/focus-tracker-js'
-import { focusTracker } from '@michaeldrotar/focus-tracker-js'
+import type { FocusTrackerConfiguration } from '@michaeldrotar/focus-tracker-js/FocusTrackerConfiguration'
+import { registerFocusTrackerConfiguration } from '@michaeldrotar/focus-tracker-js/registerFocusTrackerConfiguration'
+import { unregisterFocusTrackerConfiguration } from '@michaeldrotar/focus-tracker-js/unregisterFocusTrackerConfiguration'
 import type { ReactElement, Ref } from 'react'
 import {
   Children,
@@ -33,7 +34,7 @@ export function FocusTrackerRegistration(
   useEffect(() => {
     if (!ref.current) return
     const element = ref.current
-    focusTracker.register(element, {
+    registerFocusTrackerConfiguration(element, {
       boxShadow: props.boxShadow,
       color: props.color,
       offset: props.offset,
@@ -41,7 +42,7 @@ export function FocusTrackerRegistration(
       thickness: props.thickness,
     })
     return () => {
-      focusTracker.unregister(element)
+      unregisterFocusTrackerConfiguration(element)
     }
   }, [
     ref,
