@@ -7,6 +7,7 @@ import FocusTrackerImportSetup from './FocusTrackerImportSetup'
 import { StandardFocusSetup } from './StandardFocusSetup'
 import ReactFocusTrackerSetup from './ReactFocusTrackerSetup'
 import { FocusTracker } from './FocusTracker'
+import OtherFocusTrackerSetup from './OtherFocusTrackerSetup'
 
 function Gradient({
   conic,
@@ -154,6 +155,7 @@ export default function Page(): JSX.Element {
           </FocusTracker>
         ))}
       </div>
+      <OtherFocusTrackerSetup />
       <StandardFocusSetup />
       <FocusTrackerImportSetup />
       <ReactFocusTrackerSetup />

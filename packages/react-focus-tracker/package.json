@@ -19,6 +19,11 @@
       "types": "./dist/FocusTrackerRegistration.d.ts",
       "import": "./dist/FocusTrackerRegistration.mjs",
       "require": "./dist/FocusTrackerRegistration.js"
+    },
+    "./UserFocusTracker": {
+      "types": "./dist/UserFocusTracker.d.ts",
+      "import": "./dist/UserFocusTracker.mjs",
+      "require": "./dist/UserFocusTracker.js"
     }
   },
   "scripts": {

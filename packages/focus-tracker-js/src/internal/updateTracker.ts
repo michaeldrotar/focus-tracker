@@ -1,23 +1,18 @@
-import { internalState } from './internalState'
 import { getStackingParent } from './getStackingParent'
 import { FocusTrackerConfiguration } from '../index'
 import { applyConfiguration } from './configurations'
 import { disableTransitions, enableTransitions } from './transitions'
-import { Rect, assignRect, getElementRect, rectsDiffer } from './rects'
-
-let lastTarget: HTMLElement | undefined
-// let lastParent: HTMLElement | undefined
-let lastTargetRect: Rect | undefined
-let lastParentRect: Rect | undefined
-let lastConfiguration: FocusTrackerConfiguration | undefined
+import { assignRect, getElementRect, rectsDiffer } from './rects'
+import { FocusTracker } from './FocusTracker'
 
 export function updateTracker(
+  focusTracker: FocusTracker,
   target: HTMLElement,
   configuration: FocusTrackerConfiguration,
 ) {
-  const tracker = internalState.indicatorEl
-  const container = internalState.containerEl
-  if (!tracker || !container) return
+  const { indicatorEl, containerEl } = focusTracker
+  const { lastConfiguration, lastParentRect, lastTarget, lastTargetRect } =
+    focusTracker
 
   const targetRect = getElementRect(target)
 
@@ -34,25 +29,25 @@ export function updateTracker(
     !lastConfiguration || lastConfiguration !== configuration
 
   if (parentRectChanged) {
-    assignRect(container, parentRect, { addWindow: true })
+    assignRect(containerEl, parentRect, { addWindow: true })
   }
 
   if (targetChanged) {
-    enableTransitions()
-    assignRect(tracker, targetRect, { relativeTo: parentRect })
+    enableTransitions(focusTracker)
+    assignRect(indicatorEl, targetRect, { relativeTo: parentRect })
   } else if (targetRectChanged) {
-    disableTransitions()
-    assignRect(tracker, targetRect, { relativeTo: parentRect })
+    disableTransitions(focusTracker)
+    assignRect(indicatorEl, targetRect, { relativeTo: parentRect })
   }
 
   if (configurationChanged) {
-    enableTransitions()
-    applyConfiguration(tracker, configuration)
+    enableTransitions(focusTracker)
+    applyConfiguration(indicatorEl, configuration)
   }
 
-  lastParentRect = parentRect
+  focusTracker.lastParentRect = parentRect
   // lastParent = parent
-  lastTargetRect = targetRect
-  lastTarget = target
-  lastConfiguration = configuration
+  focusTracker.lastTargetRect = targetRect
+  focusTracker.lastTarget = target
+  focusTracker.lastConfiguration = configuration
 }
