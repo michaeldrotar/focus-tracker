@@ -24,6 +24,11 @@
       "import": "./dist/FocusTrackerConfiguration.mjs",
       "require": "./dist/FocusTrackerConfiguration.js"
     },
+    "./createOtherFocusTracker": {
+      "types": "./dist/createOtherFocusTracker.d.ts",
+      "import": "./dist/createOtherFocusTracker.mjs",
+      "require": "./dist/createOtherFocusTracker.js"
+    },
     "./registerFocusTrackerConfiguration": {
       "types": "./dist/registerFocusTrackerConfiguration.d.ts",
       "import": "./dist/registerFocusTrackerConfiguration.mjs",

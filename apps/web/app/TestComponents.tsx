@@ -5,9 +5,15 @@ import { useId } from 'react'
 
 export interface TestComponentsProps {
   rootRef?: RefObject<HTMLDivElement>
+  textRef?: RefObject<HTMLInputElement>
+  dropdownRef?: RefObject<HTMLSelectElement>
 }
 
-export function TestComponents({ rootRef }: TestComponentsProps) {
+export function TestComponents({
+  rootRef,
+  textRef,
+  dropdownRef,
+}: TestComponentsProps) {
   const id = useId()
   return (
     <div
@@ -16,11 +22,16 @@ export function TestComponents({ rootRef }: TestComponentsProps) {
     >
       <div>
         <label htmlFor={`${id}-text`}>Text Input</label>
-        <input id={`${id}-text`} style={{ width: '250px' }} type="text" />
+        <input
+          id={`${id}-text`}
+          ref={textRef}
+          style={{ width: '250px' }}
+          type="text"
+        />
       </div>
       <div>
         <label htmlFor={`${id}-dropdown`}>Dropdown</label>
-        <select id={`${id}-dropdown`}>
+        <select id={`${id}-dropdown`} ref={dropdownRef}>
           <option value="1">Option 1</option>
           <option value="2">Option 2</option>
         </select>

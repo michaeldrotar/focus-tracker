@@ -20,4 +20,6 @@ export type OtherFocusTracker = FocusTracker & {
   configure: (configuration: Partial<FocusTrackerConfiguration>) => void
   focus: (element: HTMLElement) => void
   blur: () => void
+
+  configuration: Partial<FocusTrackerConfiguration>
 }
