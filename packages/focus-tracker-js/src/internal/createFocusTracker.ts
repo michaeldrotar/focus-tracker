@@ -7,6 +7,7 @@ import { getElementConfiguration } from './getElementConfiguration'
 import { removeTracker } from './removeTracker'
 import { updateTracker } from './updateTracker'
 import { baseConfiguration } from './baseConfiguration'
+import { Engine } from './Engine'
 
 export function createFocusTracker(
   initialConfiguration?: Partial<FocusTrackerConfiguration>,
@@ -61,6 +62,9 @@ export function createFocusTracker(
     destroy() {
       containerEl.remove()
       FocusTrackerRegistry.remove(focusTracker)
+      if (!Engine.isNeeded()) {
+        Engine.stop()
+      }
     },
   }
 
@@ -69,6 +73,7 @@ export function createFocusTracker(
   }
 
   FocusTrackerRegistry.add(focusTracker)
+  Engine.start()
 
   return focusTracker
 }
