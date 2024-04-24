@@ -1,17 +1,15 @@
-import { internalState } from './internalState'
+import { FocusTracker } from './FocusTracker'
 
-export function disableTransitions() {
-  const tracker = internalState.indicatorEl
-  const container = internalState.containerEl
-  if (!tracker || !container) return
+export function disableTransitions(focusTracker: FocusTracker) {
+  const tracker = focusTracker.indicatorEl
+  const container = focusTracker.containerEl
   tracker.style.transition = 'none'
   container.style.transition = 'none'
 }
 
-export function enableTransitions() {
-  const tracker = internalState.indicatorEl
-  const container = internalState.containerEl
-  if (!tracker || !container) return
+export function enableTransitions(focusTracker: FocusTracker) {
+  const tracker = focusTracker.indicatorEl
+  const container = focusTracker.containerEl
   tracker.style.transition = 'ease-in-out all 200ms'
   container.style.transition = 'ease-in-out all 200ms'
 }

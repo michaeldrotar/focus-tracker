@@ -33,6 +33,16 @@
       "types": "./dist/unregisterFocusTrackerConfiguration.d.ts",
       "import": "./dist/unregisterFocusTrackerConfiguration.mjs",
       "require": "./dist/unregisterFocusTrackerConfiguration.js"
+    },
+    "./startUserFocusTracker": {
+      "types": "./dist/startUserFocusTracker.d.ts",
+      "import": "./dist/startUserFocusTracker.mjs",
+      "require": "./dist/startUserFocusTracker.js"
+    },
+    "./stopUserFocusTracker": {
+      "types": "./dist/stopUserFocusTracker.d.ts",
+      "import": "./dist/stopUserFocusTracker.mjs",
+      "require": "./dist/stopUserFocusTracker.js"
     }
   },
   "main": "./dist/index.js",

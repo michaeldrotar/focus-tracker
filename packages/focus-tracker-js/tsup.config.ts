@@ -6,6 +6,8 @@ export default defineConfig((options) => ({
     'src/FocusTrackerConfiguration.ts',
     'src/registerFocusTrackerConfiguration.ts',
     'src/unregisterFocusTrackerConfiguration.ts',
+    'src/startUserFocusTracker.ts',
+    'src/stopUserFocusTracker.ts',
   ],
   format: ['cjs', 'esm'],
   dts: true,

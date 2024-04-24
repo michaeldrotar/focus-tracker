@@ -1,12 +1,9 @@
-import { internalState } from './internalState'
 import { enableTransitions } from './transitions'
 import { assignTransform } from './transforms'
+import { FocusTracker } from './FocusTracker'
 
-export function removeTracker() {
-  const tracker = internalState.indicatorEl
-  if (!tracker) return
-
-  enableTransitions()
-  tracker.style.opacity = '0'
-  assignTransform(tracker, { scale: '2' })
+export function removeTracker(focusTracker: FocusTracker) {
+  enableTransitions(focusTracker)
+  focusTracker.indicatorEl.style.opacity = '0'
+  assignTransform(focusTracker.indicatorEl, { scale: '2' })
 }
