@@ -72,6 +72,7 @@ export function createUserFocusTracker(): UserFocusTracker {
     },
     destroy() {
       removeDocumentEventHandlers()
+      containerEl.remove()
     },
   }
 
