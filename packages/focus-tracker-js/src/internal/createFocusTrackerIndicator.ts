@@ -9,6 +9,7 @@ export function createFocusTrackerIndicator() {
   containerEl.style.position = 'absolute'
   containerEl.style.overflow = 'hidden'
   containerEl.style.transition = 'ease-in-out all 200ms'
+  containerEl.style.zIndex = '999999' // TODO: make this configurable
 
   const indicatorEl = document.createElement('div')
   indicatorEl.style.pointerEvents = 'none'
