@@ -1,0 +1,22 @@
+.navbar__items {
+  gap: 0.5rem;
+}
+
+.navbar__item--icon {
+  align-items: center;
+  display: flex;
+  height: 2rem;
+  justify-content: center;
+  padding: 0;
+  width: 2rem;
+}
+
+.navbar__item--icon svg {
+  height: 24px;
+  width: 24px;
+}
+
+.navbar__link--icon:hover {
+  background: var(--ifm-color-emphasis-200);
+  color: currentColor;
+}
