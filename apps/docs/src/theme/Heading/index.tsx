@@ -1,11 +1,11 @@
-import React, { LegacyRef } from 'react'
-import clsx from 'clsx'
+import type { LegacyRef } from 'react'
+import React from 'react'
+import { clsx } from 'clsx'
 import { translate } from '@docusaurus/Translate'
 import { useThemeConfig } from '@docusaurus/theme-common'
 import Link from '@docusaurus/Link'
 import useBrokenLinks from '@docusaurus/useBrokenLinks'
 import type { Props } from '@theme/Heading'
-
 import styles from './styles.module.css'
 
 type ExtendedProps = {
@@ -55,10 +55,10 @@ export default function Heading({
     >
       {props.children}
       <Link
-        className="hash-link"
-        to={`#${id}`}
         aria-label={anchorTitle}
+        className="hash-link"
         title={anchorTitle}
+        to={`#${id}`}
       >
         &#8203;
       </Link>

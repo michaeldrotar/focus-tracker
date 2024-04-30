@@ -1,13 +1,12 @@
-import clsx from 'clsx'
+import { clsx } from 'clsx'
 import Link from '@docusaurus/Link'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import Layout from '@theme/Layout'
-import HomepageFeatures from '@site/src/components/HomepageFeatures'
-import Heading from '@site/src/theme/Heading'
-
-import styles from './index.module.css'
 import { useEffect, useRef } from 'react'
 import { createOtherFocusTracker } from '@michaeldrotar/focus-tracker-js/createOtherFocusTracker'
+import HomepageFeatures from '@site/src/components/HomepageFeatures'
+import Heading from '@site/src/theme/Heading'
+import styles from './index.module.css'
 
 function HomepageHeader() {
   const headingRef = useRef<HTMLHeadingElement>(null)
@@ -27,7 +26,7 @@ function HomepageHeader() {
     })
     const interval = setInterval(() => {
       const child = children[index]
-      if (child && child instanceof HTMLElement) {
+      if (child instanceof HTMLElement) {
         focusTracker.focus(child)
       } else {
         focusTracker.blur()
@@ -44,7 +43,7 @@ function HomepageHeader() {
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
-        <Heading rootRef={headingRef} as="h1" className="hero__title">
+        <Heading as="h1" className="hero__title" rootRef={headingRef}>
           {siteConfig.title.split(/\s+/).map((word, index) => {
             return (
               <>
@@ -68,8 +67,8 @@ export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext()
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
       description="Description will go into a meta tag in <head />"
+      title={`Hello from ${siteConfig.title}`}
     >
       <HomepageHeader />
       <main>

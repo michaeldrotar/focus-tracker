@@ -1,4 +1,6 @@
-import clsx from 'clsx'
+/* eslint-disable @typescript-eslint/no-var-requires -- docusaurus code */
+
+import { clsx } from 'clsx'
 import Heading from '@theme/Heading'
 import styles from './styles.module.css'
 

@@ -1,6 +1,7 @@
-import { FocusTrackerConfiguration } from '@michaeldrotar/focus-tracker-js'
+import type { FocusTrackerConfiguration } from '@michaeldrotar/focus-tracker-js'
 import { createOtherFocusTracker } from '@michaeldrotar/focus-tracker-js/createOtherFocusTracker'
 import { useEffect, useRef, useState } from 'react'
+import Heading from '@theme/Heading'
 
 type OptionDemoProps = {
   name: keyof FocusTrackerConfiguration
@@ -9,7 +10,7 @@ type OptionDemoProps = {
 
 export function OptionDemo({ name, values }: OptionDemoProps) {
   const buttonRef = useRef<HTMLButtonElement>(null)
-  const [value, setValue] = useState('')
+  const [displayValue, setDisplayValue] = useState('')
 
   useEffect(() => {
     const button = buttonRef.current
@@ -20,12 +21,16 @@ export function OptionDemo({ name, values }: OptionDemoProps) {
     focusTracker.focus(button)
     const interval = setInterval(() => {
       index = (index + 1) % values.length
-      focusTracker.configure({ [name]: values[index] })
-      setValue(values[index].toString())
+      const currentValue = values[index]
+      focusTracker.configure({ [name]: currentValue })
+      setDisplayValue(
+        currentValue instanceof HTMLElement
+          ? currentValue.tagName
+          : currentValue.toString(),
+      )
     }, 1500)
 
     return () => {
-      console.log('cleanup')
       clearInterval(interval)
       focusTracker.destroy()
     }
@@ -33,9 +38,13 @@ export function OptionDemo({ name, values }: OptionDemoProps) {
 
   return (
     <div>
-      <h2>{name}</h2>
-      <button ref={buttonRef}>Button</button>
-      <div>{value}</div>
+      <Heading as="h2" id={`${name}2`}>
+        {name}
+      </Heading>
+      <button ref={buttonRef} type="button">
+        Button
+      </button>
+      <div>{displayValue}</div>
     </div>
   )
 }
