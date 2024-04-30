@@ -3,6 +3,7 @@ title: API Options
 ---
 
 import { OptionDemo } from '@site/src/components/OptionDemo'
+import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment'
 
 # Options
 
@@ -58,7 +59,14 @@ default: `'target'`
 
 Sets where the focus tracker's indicator will be positioned. By default, uses `'target'` as the target of the focus event. May use `'self'` for nested configurations so children show focus on itself, or may pass any other element.
 
-<OptionDemo name="target" values={['self', 'target', document.body]} />
+<OptionDemo
+  name="target"
+  values={[
+    'self',
+    'target',
+    ExecutionEnvironment.canUseDOM ? document.body : 'target',
+  ]}
+/>
 
 ## thickness
 
