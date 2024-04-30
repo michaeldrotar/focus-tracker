@@ -5,7 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic'
 const config: Config = {
   title: 'Focus Tracker',
   tagline:
-    'A Typescript-friendly to enhance focus tracking with transitions and customizations to make keyboard navigation more accessible for users and easier for developers.',
+    'A Typescript-friendly library to enhance focus tracking with transitions and customizations to make keyboard navigation more accessible for users and easier for developers.',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -73,7 +73,7 @@ const config: Config = {
           position: 'left',
           label: 'Tutorial',
         },
-        { to: '/blog', label: 'Blog', position: 'left' },
+        // { to: '/blog', label: 'Blog', position: 'left' },
         {
           href: 'https://github.com/facebook/docusaurus',
           label: 'GitHub',
