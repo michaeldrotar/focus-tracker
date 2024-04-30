@@ -28,3 +28,9 @@
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+
+html,
+body {
+  height: auto !important; /* override bad height set here: https://github.com/facebook/docusaurus/blob/ca33858ca0140ee1a97646a7b0e787e68d7afcd7/packages/docusaurus-theme-classic/src/theme/Layout/styles.module.css */
+  min-height: 100%;
+}
