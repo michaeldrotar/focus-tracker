@@ -5,7 +5,11 @@ import React from 'react'
 export default function Root({ children }) {
   return (
     <>
-      <FocusTrackerRegistration>
+      <FocusTrackerRegistration
+        boxShadow="0 0 0.5rem 1px currentColor"
+        color="var(--theme-color-primary-500)"
+        thickness={2}
+      >
         <div>{children}</div>
       </FocusTrackerRegistration>
       <UserFocusTracker />
