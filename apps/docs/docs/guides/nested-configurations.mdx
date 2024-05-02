@@ -4,9 +4,11 @@ sidebar_position: 2
 ---
 
 import { DemoBox } from '@site/src/components/demo/DemoBox'
+import { DemoButton } from '@site/src/components/demo/DemoButton'
 import { DemoGrid } from '@site/src/components/demo/DemoGrid'
-import { SampleCodeTabs } from '@site/src/components/SampleCodeTabs'
+import { DemoHero } from '@site/src/components/demo/DemoHero'
 import { DemoWindow } from '@site/src/components/demo/DemoWindow'
+import { SampleCodeTabs } from '@site/src/components/SampleCodeTabs'
 import { FocusTrackerRegistration } from '@michaeldrotar/react-focus-tracker/FocusTrackerRegistration'
 
 # Nested Configurations
@@ -27,66 +29,94 @@ To fix contrast issues, a nested configuration makes it simple to change just th
     margin: '2rem auto',
   }}
 >
-  <DemoWindow>
-    <FocusTrackerRegistration color="blue" thickness={2}>
-      <div style={{ backgroundColor: 'white', color: 'black' }}>
-        <FocusTrackerRegistration color="white">
-          <header style={{ backgroundColor: 'blue', color: 'white' }}>
-            <h1>Cool Stuff</h1>
-            <button>Get started</button>
-          </header>
-        </FocusTrackerRegistration>
-        <p>Lorem ipsum dolor sit amet...</p>
-        <button>Another button</button>
-      </div>
-    </FocusTrackerRegistration>
+  <DemoWindow
+    actions={[
+      { action: 'focus', target: '[data-demo-1]' },
+      { action: 'focus', target: '[data-demo-2]' },
+      { action: 'focus', target: '[data-demo-3]' },
+    ]}
+    caption="Without Nested Configuration"
+  >
+    <DemoHero
+      style={{
+        position: 'relative',
+        backgroundColor: 'var(--theme-color-primary-500)',
+      }}
+    >
+      <DemoBox
+        style={{
+          position: 'absolute',
+          left: '10%',
+          bottom: '20%',
+          display: 'flex',
+          flexFlow: 'row nowrap',
+          gap: '0.25rem',
+        }}
+      >
+        <DemoButton
+          data-demo-1
+          style={{ color: 'var(--theme-color-neutral-200)' }}
+        />
+        <DemoButton
+          outlined
+          data-demo-2
+          style={{ color: 'var(--theme-color-neutral-200)' }}
+        />
+      </DemoBox>
+    </DemoHero>
+    <DemoBox>
+      <DemoButton
+        style={{ display: 'block', margin: '1rem auto' }}
+        data-demo-3
+      />
+    </DemoBox>
   </DemoWindow>
   <DemoWindow
     actions={[
       { action: 'focus', target: '[data-demo-1]' },
-      { action: 'wait', duration: 1000 },
       { action: 'focus', target: '[data-demo-2]' },
-      { action: 'wait', duration: 1000 },
       { action: 'focus', target: '[data-demo-3]' },
-      { action: 'wait', duration: 1000 },
-      { action: 'focus', target: '[data-demo-4]' },
-      { action: 'wait', duration: 1000 },
-      { action: 'focus', target: '[data-demo-5]' },
-      { action: 'wait', duration: 1000 },
-      { action: 'focus', target: '[data-demo-6]' },
-      { action: 'wait', duration: 1000 },
-      { action: 'blur' },
-      { action: 'wait', duration: 1000 },
     ]}
+    caption="With Nested Configuration"
   >
-    <DemoGrid
-      style={{ gap: '0.5rem', height: '80%', margin: '5% auto', width: '80%' }}
+    <FocusTrackerRegistration
+      color="var(--theme-color-netraul-200)"
+      refProperty="rootRef"
     >
-      <DemoBox
-        style={{ backgroundColor: 'var(--theme-color-neutral-400)' }}
-        data-demo-1
-      />
-      <DemoBox
-        style={{ backgroundColor: 'var(--theme-color-neutral-600)' }}
-        data-demo-2
-      />
-      <DemoBox
-        style={{ backgroundColor: 'var(--theme-color-neutral-400)' }}
+      <DemoHero
+        style={{
+          position: 'relative',
+          backgroundColor: 'var(--theme-color-primary-500)',
+        }}
+      >
+        <DemoBox
+          style={{
+            position: 'absolute',
+            left: '10%',
+            bottom: '20%',
+            display: 'flex',
+            flexFlow: 'row nowrap',
+            gap: '0.25rem',
+          }}
+        >
+          <DemoButton
+            data-demo-1
+            style={{ color: 'var(--theme-color-neutral-200)' }}
+          />
+          <DemoButton
+            outlined
+            data-demo-2
+            style={{ color: 'var(--theme-color-neutral-200)' }}
+          />
+        </DemoBox>
+      </DemoHero>
+    </FocusTrackerRegistration>
+    <DemoBox>
+      <DemoButton
+        style={{ display: 'block', margin: '1rem auto' }}
         data-demo-3
       />
-      <DemoBox
-        style={{ backgroundColor: 'var(--theme-color-neutral-600)' }}
-        data-demo-4
-      />
-      <DemoBox
-        style={{ backgroundColor: 'var(--theme-color-neutral-400)' }}
-        data-demo-5
-      />
-      <DemoBox
-        style={{ backgroundColor: 'var(--theme-color-neutral-600)' }}
-        data-demo-6
-      />
-    </DemoGrid>
+    </DemoBox>
   </DemoWindow>
 </div>
 
@@ -154,4 +184,3 @@ To fix contrast issues, a nested configuration makes it simple to change just th
 
   </SampleCodeTabs.React>
 </SampleCodeTabs>
-@site/src/components/demo/DemoGrid

@@ -1,0 +1,5 @@
+.DemoHero {
+  background-color: var(--theme-color-neutral-200);
+  height: 60%;
+  width: 100%;
+}

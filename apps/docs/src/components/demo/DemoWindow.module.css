@@ -14,6 +14,11 @@
   width: 20rem;
 }
 
+.demoWindowCaption {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
 .demoWindowShadow {
   background-color: var(--theme-color-neutral-800);
   border-radius: 50%;

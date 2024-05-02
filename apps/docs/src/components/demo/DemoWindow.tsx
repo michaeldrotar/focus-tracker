@@ -2,29 +2,28 @@ import { useEffect, useRef, type HTMLAttributes, type RefObject } from 'react'
 import { createOtherFocusTracker } from '@michaeldrotar/focus-tracker-js/createOtherFocusTracker'
 import styles from './DemoWindow.module.css'
 
-export type DemoWindowAction =
-  | {
-      action: 'focus'
-      target: string
-    }
-  | {
-      action: 'blur'
-    }
-  | {
-      action: 'wait'
-      duration: number
-    }
+type FocusAction = {
+  action: 'focus'
+  target: 'string'
+}
+
+type BlurAction = {
+  action: 'blur'
+}
+
+export type DemoWindowAction = FocusAction | BlurAction
 
 export type DemoWindowProps = Pick<
-  HTMLAttributes<HTMLDivElement>,
+  HTMLAttributes<HTMLElement>,
   'children' | 'className' | 'style'
 > & {
-  rootRef?: RefObject<HTMLDivElement>
   actions?: DemoWindowAction[]
+  caption?: string
+  rootRef?: RefObject<HTMLElement>
 }
 
 export function DemoWindow(props: DemoWindowProps) {
-  const { children, rootRef, actions, ...restProps } = props
+  const { actions, caption, children, rootRef, ...restProps } = props
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -37,7 +36,6 @@ export function DemoWindow(props: DemoWindowProps) {
     const execute = () => {
       const action = actions[index]
       let target: Element | null = null
-      let delay = 0
       switch (action.action) {
         case 'focus':
           target = element.querySelector(action.target)
@@ -48,12 +46,9 @@ export function DemoWindow(props: DemoWindowProps) {
         case 'blur':
           focusTracker.blur()
           break
-        case 'wait':
-          delay = action.duration
-          break
       }
       index = (index + 1) % actions.length
-      timeout = setTimeout(execute, delay)
+      timeout = setTimeout(execute, 1000)
     }
 
     execute()
@@ -65,7 +60,10 @@ export function DemoWindow(props: DemoWindowProps) {
   })
 
   return (
-    <div ref={rootRef} {...restProps}>
+    <figure ref={rootRef} {...restProps}>
+      {caption ? (
+        <figcaption className={styles.demoWindowCaption}>{caption}</figcaption>
+      ) : null}
       <div className={styles.demoWindow}>
         <div className={styles.demoWindowTabBar}>
           <div className={styles.demoWindowButtons}>
@@ -87,6 +85,6 @@ export function DemoWindow(props: DemoWindowProps) {
         </div>
       </div>
       <div className={styles.demoWindowShadow} />
-    </div>
+    </figure>
   )
 }

@@ -1,0 +1,13 @@
+.DemoButton {
+  background-color: currentColor;
+  border-radius: 0.25rem;
+  color: var(--theme-color-primary-500);
+  display: inline-block;
+  height: 1.1rem;
+  width: 3rem;
+}
+
+.DemoButtonOutlined {
+  background-color: transparent;
+  border: 1px solid currentColor;
+}
