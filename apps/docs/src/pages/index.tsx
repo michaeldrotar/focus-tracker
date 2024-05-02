@@ -3,7 +3,6 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import Layout from '@theme/Layout'
 import { useEffect, useRef } from 'react'
 import { createOtherFocusTracker } from '@michaeldrotar/focus-tracker-js/createOtherFocusTracker'
-import HomepageFeatures from '@site/src/components/HomepageFeatures'
 import Heading from '@site/src/theme/Heading'
 import styles from './index.module.css'
 
@@ -183,8 +182,11 @@ function HomepageHeader() {
               {siteConfig.tagline}
             </Heading>
             <div className={styles.buttons}>
-              <Link className="button button--secondary button--lg" to="/intro">
-                Docusaurus - 5min ⏱️
+              <Link
+                className="button button--secondary button--lg"
+                to="/get-started"
+              >
+                Get Started
               </Link>
             </div>
           </div>
@@ -240,9 +242,6 @@ export default function Home(): JSX.Element {
   return (
     <Layout description={siteConfig.tagline}>
       <HomepageHeader />
-      <main>
-        <HomepageFeatures />
-      </main>
     </Layout>
   )
 }
