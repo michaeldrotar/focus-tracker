@@ -1,0 +1,82 @@
+.demoWindow {
+  background-color: var(--theme-color-background);
+  border-radius: 0.6rem;
+  box-shadow:
+    0rem 0rem 0.75rem 0
+      color-mix(in srgb, var(--theme-color-neutral-800) 20%, transparent),
+    0rem 0.25rem 0.75rem 0
+      color-mix(in srgb, var(--theme-color-neutral-800) 20%, transparent);
+  display: flex;
+  flex-flow: column nowrap;
+  height: 12.5rem;
+  overflow: hidden;
+  position: relative;
+  width: 20rem;
+}
+
+.demoWindowShadow {
+  background-color: var(--theme-color-neutral-800);
+  border-radius: 50%;
+  filter: blur(0.5rem);
+  height: 1rem;
+  opacity: 0.2;
+  margin: 1rem auto 0;
+  transform: perspective(1rem) rotateX(0deg) scale(0.8, 0.35);
+}
+
+.demoWindowTabBar {
+  align-items: flex-end;
+  background-color: var(--theme-color-neutral-100);
+  display: flex;
+  flex: 0 0 auto;
+  flex-flow: row nowrap;
+}
+
+.demoWindowButtons {
+  align-self: center;
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 0.25rem;
+  padding: 0 0.6rem;
+}
+
+.demoWindowButton {
+  background-color: var(--theme-color-neutral-500);
+  border-radius: 50%;
+  height: 0.5rem;
+  width: 0.5rem;
+}
+
+.demoWindowButtonRed {
+  background-color: var(--color-red-500);
+}
+
+.demoWindowButtonYellow {
+  background-color: var(--color-yellow-500);
+}
+
+.demoWindowButtonGreen {
+  background-color: var(--color-green-500);
+}
+
+.demoWindowTab {
+  background-color: var(--theme-color-neutral-200);
+  border-radius: 0.5rem 0.5rem 0 0;
+  height: 1.1rem;
+  margin-top: 0.25rem;
+  width: 5rem;
+}
+
+.demoWindowAddressBar {
+  background-color: var(--theme-color-neutral-200);
+  border-bottom: 1px solid var(--theme-color-neutral-300);
+  flex: 0 0 auto;
+  height: 1.15rem;
+}
+
+.demoWindowBody {
+  background-color: var(--theme-color-background);
+  color: var(--theme-color-foreground);
+  flex: 1 1 auto;
+  position: relative;
+}
