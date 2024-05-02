@@ -1,0 +1,37 @@
+---
+title: React
+sidebar_position: 3
+---
+
+import { PackageManagerTabs } from '@site/src/components/PackageManagerTabs'
+
+# React
+
+Focus Tracker can be installed with your choice of package manager.
+Then use the components you need.
+
+<PackageManagerTabs>
+  <PackageManagerTabs.Npm>
+    ```shell npm install @michaeldrotar/react-focus-tracker --save ```
+  </PackageManagerTabs.Npm>
+  <PackageManagerTabs.Yarn>
+    ```shell yarn add @michaeldrotar/react-focus-tracker ```
+  </PackageManagerTabs.Yarn>
+  <PackageManagerTabs.Pnpm>
+    ```shell pnpm add @michaeldrotar/react-focus-tracker ```
+  </PackageManagerTabs.Pnpm>
+</PackageManagerTabs>
+
+```tsx
+import { FocusTrackerRegistration } from '@michaeldrotar/react-focus-tracker/FocusTrackerRegistration'
+import { UserFocusTracker } from '@michaeldrotar/react-focus-tracker/UserFocusTracker'
+
+function App() {
+  return (
+    <FocusTrackerRegistration>
+      <body />
+    </FocusTrackerRegistration>
+    <UserFocusTracker />
+  )
+}
+```

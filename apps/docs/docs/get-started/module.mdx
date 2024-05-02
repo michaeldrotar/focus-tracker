@@ -1,0 +1,31 @@
+---
+title: Module
+sidebar_position: 2
+---
+
+import { PackageManagerTabs } from '@site/src/components/PackageManagerTabs'
+
+# Module
+
+Focus Tracker can be installed with your choice of package manager.
+Then import the functions you need to get going.
+
+<PackageManagerTabs>
+  <PackageManagerTabs.Npm>
+    ```shell npm install @michaeldrotar/focus-tracker-js --save ```
+  </PackageManagerTabs.Npm>
+  <PackageManagerTabs.Yarn>
+    ```shell yarn add @michaeldrotar/focus-tracker-js ```
+  </PackageManagerTabs.Yarn>
+  <PackageManagerTabs.Pnpm>
+    ```shell pnpm add @michaeldrotar/focus-tracker-js ```
+  </PackageManagerTabs.Pnpm>
+</PackageManagerTabs>
+
+```tsx
+import { registerFocusTrackerConfiguration } from '@michaeldrotar/focus-tracker-js/registerFocusTrackerConfiguration'
+import { startUserFocusTracker } from '@michaeldrotar/focus-tracker-js/startUserFocusTracker'
+
+registerFocusTrackerConfiguration(document.body)
+startUserFocusTracker()
+```

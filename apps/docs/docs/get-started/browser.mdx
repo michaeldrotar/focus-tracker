@@ -1,0 +1,35 @@
+---
+title: Browser
+sidebar_position: 1
+---
+
+import { PackageManagerTabs } from '@site/src/components/PackageManagerTabs'
+
+# Browser
+
+For direct browser usage, install the package and then load the main distribution file. The `window.focusTracker` namespace will hold all the documented functionality.
+
+:::tip
+If possible, it is preferable to use the module version and only import the necessary pieces.
+See the [module](./module) documentation for more information.
+:::
+
+<PackageManagerTabs>
+  <PackageManagerTabs.Npm>
+    ```shell npm install @michaeldrotar/focus-tracker-js --save ```
+  </PackageManagerTabs.Npm>
+  <PackageManagerTabs.Yarn>
+    ```shell yarn add @michaeldrotar/focus-tracker-js ```
+  </PackageManagerTabs.Yarn>
+  <PackageManagerTabs.Pnpm>
+    ```shell pnpm add @michaeldrotar/focus-tracker-js ```
+  </PackageManagerTabs.Pnpm>
+</PackageManagerTabs>
+
+```html
+<script src="/node_modules/@michaeldrotar/focus-tracker-js/dist/index.js"></script>
+<script>
+  window.focusTracker.register(document.body)
+  window.focusTracker.start()
+</script>
+```
