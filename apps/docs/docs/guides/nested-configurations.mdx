@@ -1,0 +1,157 @@
+---
+title: Nested Configurations
+sidebar_position: 2
+---
+
+import { DemoBox } from '@site/src/components/demo/DemoBox'
+import { DemoGrid } from '@site/src/components/demo/DemoGrid'
+import { SampleCodeTabs } from '@site/src/components/SampleCodeTabs'
+import { DemoWindow } from '@site/src/components/demo/DemoWindow'
+import { FocusTrackerRegistration } from '@michaeldrotar/react-focus-tracker/FocusTrackerRegistration'
+
+# Nested Configurations
+
+Sometimes you'll need a different configuration for a specific part of your website for any number of reasons.
+Focus Tracker allows you to create nested configurations to handle these cases.
+
+## Color Contrast
+
+To fix contrast issues, a nested configuration makes it simple to change just the color while still retaining any other configuration.
+
+<div
+  style={{
+    display: 'flex',
+    flexFlow: 'row wrap',
+    justifyContent: 'center',
+    gap: '1rem',
+    margin: '2rem auto',
+  }}
+>
+  <DemoWindow>
+    <FocusTrackerRegistration color="blue" thickness={2}>
+      <div style={{ backgroundColor: 'white', color: 'black' }}>
+        <FocusTrackerRegistration color="white">
+          <header style={{ backgroundColor: 'blue', color: 'white' }}>
+            <h1>Cool Stuff</h1>
+            <button>Get started</button>
+          </header>
+        </FocusTrackerRegistration>
+        <p>Lorem ipsum dolor sit amet...</p>
+        <button>Another button</button>
+      </div>
+    </FocusTrackerRegistration>
+  </DemoWindow>
+  <DemoWindow
+    actions={[
+      { action: 'focus', target: '[data-demo-1]' },
+      { action: 'wait', duration: 1000 },
+      { action: 'focus', target: '[data-demo-2]' },
+      { action: 'wait', duration: 1000 },
+      { action: 'focus', target: '[data-demo-3]' },
+      { action: 'wait', duration: 1000 },
+      { action: 'focus', target: '[data-demo-4]' },
+      { action: 'wait', duration: 1000 },
+      { action: 'focus', target: '[data-demo-5]' },
+      { action: 'wait', duration: 1000 },
+      { action: 'focus', target: '[data-demo-6]' },
+      { action: 'wait', duration: 1000 },
+      { action: 'blur' },
+      { action: 'wait', duration: 1000 },
+    ]}
+  >
+    <DemoGrid
+      style={{ gap: '0.5rem', height: '80%', margin: '5% auto', width: '80%' }}
+    >
+      <DemoBox
+        style={{ backgroundColor: 'var(--theme-color-neutral-400)' }}
+        data-demo-1
+      />
+      <DemoBox
+        style={{ backgroundColor: 'var(--theme-color-neutral-600)' }}
+        data-demo-2
+      />
+      <DemoBox
+        style={{ backgroundColor: 'var(--theme-color-neutral-400)' }}
+        data-demo-3
+      />
+      <DemoBox
+        style={{ backgroundColor: 'var(--theme-color-neutral-600)' }}
+        data-demo-4
+      />
+      <DemoBox
+        style={{ backgroundColor: 'var(--theme-color-neutral-400)' }}
+        data-demo-5
+      />
+      <DemoBox
+        style={{ backgroundColor: 'var(--theme-color-neutral-600)' }}
+        data-demo-6
+      />
+    </DemoGrid>
+  </DemoWindow>
+</div>
+
+<SampleCodeTabs>
+  <SampleCodeTabs.Typescript>
+    ```html
+    <body style="background-color: white; color: black">
+      <header style="background-color: blue; color: white">
+        <h1>Cool Stuff</h1>
+        <button>Get started</button>
+      </header>
+      <p>Lorem ipsum dolor sit amet...</p>
+      <button>Another button</button>
+    </body>
+    ```
+
+    ```ts
+    import { registerFocusTrackerConfiguration } from '@michaeldrotar/focus-tracker-js/registerFocusTrackerConfiguration'
+    import { startUserFocusTracker } from '@michaeldrotar/focus-tracker-js/startUserFocusTracker'
+
+    // highlight-start
+    registerFocusTrackerConfiguration(document.body, {
+      color: 'blue',
+      thickness: 2
+    })
+    registerFocusTrackerConfiguration(document.querySelector('header'), {
+      color: 'white'
+    })
+    // highlight-end
+    startUserFocusTracker()
+    ```
+
+  </SampleCodeTabs.Typescript>
+  <SampleCodeTabs.React>
+    ```tsx
+    import { FocusTrackerRegistration } from '@michaeldrotar/react-focus-tracker/FocusTrackerRegistration'
+    import { UserFocusTracker } from '@michaeldrotar/react-focus-tracker/UserFocusTracker'
+
+    function App() {
+      return (
+        {/* highlight-start */}
+        <FocusTrackerRegistration color="blue" thickness={2}>
+        {/* highlight-end */}
+          <body style="background-color: white; color: black">
+            {/* highlight-start */}
+            <FocusTrackerRegistration color="white">
+            {/* highlight-end */}
+              <header style={{ backgroundColor: 'blue', color: 'white' }}>
+                <h1>Cool Stuff</h1>
+                <button>Get started</button>
+              </header>
+            {/* highlight-start */}
+            </FocusTrackerRegistration>
+            {/* highlight-end */}
+            <p>Lorem ipsum dolor sit amet...</p>
+            <button>Another button</button>
+          </body>
+        {/* highlight-start */}
+        </FocusTrackerRegistration>
+        {/* highlight-end */}
+        <UserFocusTracker />
+      )
+    }
+    ```
+
+  </SampleCodeTabs.React>
+</SampleCodeTabs>
+@site/src/components/demo/DemoGrid

@@ -1,0 +1,53 @@
+---
+title: User Focus Tracking
+sidebar_position: 1
+---
+
+import { SampleCodeTabs } from '@site/src/components/SampleCodeTabs'
+
+# User Focus Tracking
+
+In its simplest use case, Focus Tracker can just track the current user's focus.
+A single configuration can be created on the `document.body` to provide a consistent experience.
+
+<SampleCodeTabs>
+  <SampleCodeTabs.Typescript>
+    ```ts showLineNumbers
+    import { registerFocusTrackerConfiguration } from '@michaeldrotar/focus-tracker-js/registerFocusTrackerConfiguration'
+    import { startUserFocusTracker } from '@michaeldrotar/focus-tracker-js/startUserFocusTracker'
+
+    // highlight-start
+    registerFocusTrackerConfiguration(document.body, {
+      color: 'blue',
+      thickness: 2
+    })
+    startUserFocusTracker()
+    // highlight-end
+    ```
+
+  </SampleCodeTabs.Typescript>
+  <SampleCodeTabs.React>
+    ```tsx
+    import { FocusTrackerRegistration } from '@michaeldrotar/react-focus-tracker/FocusTrackerRegistration'
+    import { UserFocusTracker } from '@michaeldrotar/react-focus-tracker/UserFocusTracker'
+
+    function App() {
+      return (
+        {/* highlight-start */}
+        <FocusTrackerRegistration color="blue" thickness={2}>
+        {/* highlight-end */}
+          <body />
+        {/* highlight-start */}
+        </FocusTrackerRegistration>
+        <UserFocusTracker />
+        {/* highlight-end */}
+      )
+    }
+    ```
+
+  </SampleCodeTabs.React>
+</SampleCodeTabs>
+
+:::tip
+Check out the [Configuration](../api/configuration) page to see all options.
+:::
