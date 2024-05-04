@@ -11,6 +11,7 @@ export function ConfigurationTargetDemo() {
         { action: 'focus', target: '[data-demo-parent]' },
         { action: 'focus', target: 'div' },
       ]}
+      delayInMs={2000}
       onAction={(action) => {
         if (action.action === 'focus') {
           if (action.target === 'div') {
@@ -23,6 +24,14 @@ export function ConfigurationTargetDemo() {
         }
       }}
       onInit={(focusTracker, rootElement) => {
+        focusTracker.configure({
+          boxShadow: 'none',
+          color: '-webkit-focus-ring-color',
+          offset: 0,
+          target: 'target',
+          thickness: 1,
+        })
+
         const target = rootElement.querySelector('[data-demo-target]')
         if (target && target instanceof HTMLElement) {
           focusTracker.focus(target)
@@ -31,7 +40,6 @@ export function ConfigurationTargetDemo() {
     >
       <DemoBox
         style={{
-          color: 'var(--theme-color-neutral-600)',
           fontSize: '0.8rem',
           padding: '0.5rem',
         }}
@@ -41,6 +49,7 @@ export function ConfigurationTargetDemo() {
           style={{
             border: '2px dashed var(--theme-color-neutral-300)',
             backgroundColor: 'var(--theme-color-neutral-200)',
+            color: 'var(--theme-color-neutral-700)',
             padding: '0.5rem',
           }}
         >
