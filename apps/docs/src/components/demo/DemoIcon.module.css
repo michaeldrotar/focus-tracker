@@ -1,0 +1,13 @@
+.DemoIcon {
+  background-color: currentColor;
+  border-radius: 50%;
+  color: var(--theme-color-neutral-500);
+  display: inline-block;
+  height: 0.5rem;
+  width: 0.5rem;
+}
+
+.DemoIconOutlined {
+  background-color: transparent;
+  border: 1px solid currentColor;
+}

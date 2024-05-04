@@ -1,0 +1,27 @@
+.ConfigurationSetting {
+  align-items: center;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.ConfigurationSetting + .ConfigurationSetting {
+  margin-top: 3rem;
+}
+
+.ConfigurationSettingContent {
+  flex: 1 1 auto;
+}
+
+.ConfigurationSettingDemo {
+  flex: 0 0 auto;
+  max-width: 100%;
+}
+
+@media (min-width: 1440px) {
+  .ConfigurationSetting {
+    flex-flow: row nowrap;
+    gap: 3rem;
+  }
+}

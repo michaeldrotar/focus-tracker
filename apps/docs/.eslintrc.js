@@ -6,5 +6,12 @@ module.exports = {
   parserOptions: {
     project: true,
   },
-  rules: {},
+  rules: {
+    'react-hooks/exhaustive-deps': [
+      'warn',
+      {
+        additionalHooks: 'useStableEffect',
+      },
+    ],
+  },
 }

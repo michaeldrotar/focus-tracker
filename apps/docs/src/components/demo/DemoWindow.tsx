@@ -1,17 +1,27 @@
 import { useEffect, useRef, type HTMLAttributes, type RefObject } from 'react'
 import { createOtherFocusTracker } from '@michaeldrotar/focus-tracker-js/createOtherFocusTracker'
+import { clsx } from 'clsx'
+import type { FocusTrackerConfiguration } from '@michaeldrotar/focus-tracker-js/FocusTrackerConfiguration'
+import { useStableEffect } from '@site/src/hooks/useStableEffect'
 import styles from './DemoWindow.module.css'
 
 type FocusAction = {
   action: 'focus'
-  target: 'string'
+  target: string
 }
 
 type BlurAction = {
   action: 'blur'
 }
 
-export type DemoWindowAction = FocusAction | BlurAction
+type ConfigAction = {
+  action: 'config'
+  config: Partial<FocusTrackerConfiguration>
+}
+
+type AnyAction = FocusAction | BlurAction | ConfigAction
+
+export type DemoWindowAction = AnyAction | AnyAction[]
 
 export type DemoWindowProps = Pick<
   HTMLAttributes<HTMLElement>,
@@ -19,22 +29,49 @@ export type DemoWindowProps = Pick<
 > & {
   actions?: DemoWindowAction[]
   caption?: string
+  centerContent?: boolean
+  delayInMs?: number
   rootRef?: RefObject<HTMLElement>
+  onInit?: (
+    focusTracker: ReturnType<typeof createOtherFocusTracker>,
+    demoElement: HTMLElement,
+  ) => void
+  onAction?: (action: AnyAction) => void
 }
 
 export function DemoWindow(props: DemoWindowProps) {
-  const { actions, caption, children, rootRef, ...restProps } = props
+  const {
+    actions,
+    caption,
+    centerContent,
+    children,
+    className,
+    delayInMs,
+    rootRef,
+    onInit,
+    onAction,
+    ...restProps
+  } = props
   const ref = useRef<HTMLDivElement>(null)
+  const onInitRef = useRef<DemoWindowProps['onInit']>(props.onInit)
+  const onActionRef = useRef<((action: AnyAction) => void) | undefined>(
+    onAction,
+  )
 
   useEffect(() => {
+    onInitRef.current = onInit
+    onActionRef.current = onAction
+  }, [onInit, onAction])
+
+  useStableEffect(() => {
     const element = ref.current
     if (!element || !actions?.length) return
 
     let index = 0
     let timeout: NodeJS.Timeout
     const focusTracker = createOtherFocusTracker()
-    const execute = () => {
-      const action = actions[index]
+
+    const runAction = (action: AnyAction) => {
       let target: Element | null = null
       switch (action.action) {
         case 'focus':
@@ -46,21 +83,43 @@ export function DemoWindow(props: DemoWindowProps) {
         case 'blur':
           focusTracker.blur()
           break
+        case 'config':
+          focusTracker.configure(action.config)
+          break
       }
-      index = (index + 1) % actions.length
-      timeout = setTimeout(execute, 1000)
+      if (onActionRef.current) {
+        onActionRef.current(action)
+      }
     }
 
+    const execute = () => {
+      const action = actions[index]
+      if (Array.isArray(action)) {
+        action.forEach(runAction)
+      } else {
+        runAction(action)
+      }
+      index = (index + 1) % actions.length
+      timeout = setTimeout(execute, delayInMs || 1000)
+    }
+
+    if (onInitRef.current) {
+      onInitRef.current(focusTracker, ref.current)
+    }
     execute()
 
     return () => {
       clearTimeout(timeout)
       focusTracker.destroy()
     }
-  })
+  }, [actions, delayInMs])
 
   return (
-    <figure ref={rootRef} {...restProps}>
+    <figure
+      className={clsx(styles.demoWindowContainer, className)}
+      ref={rootRef}
+      {...restProps}
+    >
       {caption ? (
         <figcaption className={styles.demoWindowCaption}>{caption}</figcaption>
       ) : null}
@@ -80,7 +139,13 @@ export function DemoWindow(props: DemoWindowProps) {
           <div className={styles.demoWindowTab} />
         </div>
         <div className={styles.demoWindowAddressBar} />
-        <div className={styles.demoWindowBody} ref={ref}>
+        <div
+          className={clsx(
+            styles.demoWindowBody,
+            centerContent && styles.demoWindowBodyCentered,
+          )}
+          ref={ref}
+        >
           {children}
         </div>
       </div>
