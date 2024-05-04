@@ -20,6 +20,33 @@
   width: 20rem;
 }
 
+.demoWindow3D {
+  /* TODO: support 3D window from example */
+  /* source: https://polypane.app/css-3d-transform-examples/ */
+  transform: rotateX(51deg) rotateZ(43deg);
+  transform-style: preserve-3d;
+  box-shadow:
+    1px 1px 0 1px var(--theme-color-background),
+    -1px 0 28px 0 color-mix(in srgb, var(--theme-color-foreground) 10%, transparent),
+    28px 28px 28px 0
+      color-mix(in srgb, var(--theme-color-foreground) 25%, transparent);
+  transition:
+    0.4s ease-in-out transform,
+    0.4s ease-in-out box-shadow;
+
+  &:hover {
+    transform: translate3d(0px, -16px, 0px) rotateX(51deg) rotateZ(43deg);
+    box-shadow:
+      1px 1px 0 1px #f9f9fb,
+      -1px 0 28px 0 rgba(34, 33, 81, 0.01),
+      54px 54px 28px -10px rgba(34, 33, 81, 0.15);
+    box-shadow:
+      1px 1px 0 1px var(--theme-color-background),
+      -1px 0 28px 0 color-mix(in srgb, var(--theme-color-foreground) 10%, transparent),
+      54px 54px 28px -10px color-mix(in srgb, var(--theme-color-foreground) 15%, transparent);
+  }
+}
+
 .demoWindowCaption {
   margin-bottom: 1rem;
   text-align: center;
