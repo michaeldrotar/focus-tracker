@@ -29,6 +29,8 @@
   --theme-color-primary-800: var(--color-rose-800);
   --theme-color-primary-900: var(--color-rose-900);
   --theme-color-primary-950: var(--color-rose-950);
+
+  --theme-color-tertiary-500: var(--color-amber-500);
 }
 
 [data-theme='dark'] {
@@ -57,4 +59,6 @@
   --theme-color-primary-800: var(--color-amber-200);
   --theme-color-primary-900: var(--color-amber-100);
   --theme-color-primary-950: var(--color-amber-50);
+
+  --theme-color-tertiary-500: var(--color-rose-500);
 }

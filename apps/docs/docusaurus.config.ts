@@ -4,7 +4,7 @@ import type * as Preset from '@docusaurus/preset-classic'
 
 const config: Config = {
   title: 'Focus Tracker',
-  tagline: 'Enhance keyboard navigation with accessible focus tracking.',
+  tagline: 'Enhanced keyboard navigation with accessible focus tracking.',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here

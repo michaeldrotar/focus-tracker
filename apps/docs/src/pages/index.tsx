@@ -11,9 +11,12 @@ function HomepageHeader() {
   return (
     <header className={styles.heroBanner}>
       <div className="container">
+        <Heading as="h1" className={styles.siteTitle}>
+          {siteConfig.title}
+        </Heading>
         <div className={styles.heroContainer}>
           <div className={styles.heroContent}>
-            <Heading as="h1" className={styles.heroBannerTitle}>
+            <Heading as="h2" className={styles.heroBannerTitle}>
               {siteConfig.tagline}
             </Heading>
             <div className={styles.buttons}>
