@@ -72,7 +72,7 @@ export function ConfigurationSettingPropertyDemo(
       }}
     >
       <div style={{ display: 'flex', flexFlow: 'row nowrap', gap: '1rem' }}>
-        <DemoButton data-demo-1 />
+        <DemoButton colored data-demo-1 />
       </div>
       <p
         style={{
