@@ -24,7 +24,10 @@ export function createFocusTracker(
     configuration: {},
 
     configure(configuration: Partial<FocusTrackerConfiguration>) {
-      focusTracker.configuration = { ...configuration }
+      focusTracker.configuration = {
+        ...focusTracker.configuration,
+        ...configuration,
+      }
     },
     blur() {
       focusedElement = undefined
