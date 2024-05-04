@@ -1,5 +1,10 @@
 .DemoHero {
   background-color: var(--theme-color-neutral-200);
   height: 60%;
+  position: relative;
   width: 100%;
+}
+
+.DemoHeroColored {
+  background-color: var(--theme-color-primary-500);
 }

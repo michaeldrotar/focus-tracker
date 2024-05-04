@@ -38,34 +38,25 @@ To fix contrast issues, a nested configuration makes it simple to change just th
     caption="Without Nested Configuration"
   >
     <DemoHero
-      style={{
-        position: 'relative',
-        backgroundColor: 'var(--theme-color-primary-500)',
-      }}
-    >
-      <DemoBox
-        style={{
-          position: 'absolute',
-          left: '10%',
-          bottom: '20%',
-          display: 'flex',
-          flexFlow: 'row nowrap',
-          gap: '0.25rem',
-        }}
-      >
+      colored
+      primaryButton={
         <DemoButton
           data-demo-1
-          style={{ color: 'var(--theme-color-neutral-200)' }}
+          style={{ backgroundColor: 'var(--theme-color-neutral-200)' }}
         />
+      }
+      secondaryButton={
         <DemoButton
+          colored
           outlined
           data-demo-2
-          style={{ color: 'var(--theme-color-neutral-200)' }}
+          style={{ borderColor: 'var(--theme-color-neutral-200)' }}
         />
-      </DemoBox>
-    </DemoHero>
+      }
+    ></DemoHero>
     <DemoBox>
       <DemoButton
+        colored
         style={{ display: 'block', margin: '1rem auto' }}
         data-demo-3
       />
@@ -84,35 +75,25 @@ To fix contrast issues, a nested configuration makes it simple to change just th
       refProperty="rootRef"
     >
       <DemoHero
-        style={{
-          position: 'relative',
-          backgroundColor: 'var(--theme-color-primary-500)',
-        }}
-      >
-        <DemoBox
-          style={{
-            position: 'absolute',
-            left: '10%',
-            bottom: '20%',
-            display: 'flex',
-            flexFlow: 'row nowrap',
-            gap: '0.25rem',
-          }}
-        >
+        colored
+        primaryButton={
           <DemoButton
             data-demo-1
-            style={{ color: 'var(--theme-color-neutral-200)' }}
+            style={{ backgroundColor: 'var(--theme-color-neutral-200)' }}
           />
+        }
+        secondaryButton={
           <DemoButton
             outlined
             data-demo-2
-            style={{ color: 'var(--theme-color-neutral-200)' }}
+            style={{ borderColor: 'var(--theme-color-neutral-200)' }}
           />
-        </DemoBox>
-      </DemoHero>
+        }
+      ></DemoHero>
     </FocusTrackerRegistration>
     <DemoBox>
       <DemoButton
+        colored
         style={{ display: 'block', margin: '1rem auto' }}
         data-demo-3
       />
