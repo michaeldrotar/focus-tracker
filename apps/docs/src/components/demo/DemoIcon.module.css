@@ -1,7 +1,7 @@
 .DemoIcon {
   background-color: currentColor;
   border-radius: 50%;
-  color: var(--theme-color-neutral-500);
+  color: var(--theme-color-neutral-400);
   display: inline-block;
   height: 0.5rem;
   width: 0.5rem;
