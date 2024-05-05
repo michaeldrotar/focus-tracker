@@ -19,7 +19,7 @@ export function HomepageFeatureBlocks(props: HomepageFeatureBlocksProps) {
         <Heading as="h2" className="text-center text-3xl font-bold">
           Use Cases
         </Heading>
-        <ul className="mt-8 flex flex-col gap-8 sm:flex-row">
+        <ul className="m-0 mt-8 flex list-none flex-col gap-8 p-0 sm:flex-row">
           <li className="flex-1">
             <HomepageFeatureBlock
               icon={

@@ -4,6 +4,7 @@ module.exports = {
   content: ['./src/**/*.{mdx,tsx}'],
   corePlugins: {
     container: false, // prefer docusaurus container that works with sidebars
+    preflight: false,
   },
   theme: {
     colors: {

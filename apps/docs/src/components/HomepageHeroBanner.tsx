@@ -11,19 +11,19 @@ export function HomepageHeroBanner() {
       <div className="container px-8">
         <Heading
           as="h1"
-          className="from-primary-500 to-tertiary-500 inline-block bg-gradient-to-r bg-clip-text text-6xl text-transparent sm:text-7xl"
+          className="from-primary-500 to-tertiary-500 m-0 inline-block bg-gradient-to-r bg-clip-text text-6xl text-transparent sm:text-7xl"
         >
           {siteConfig.title}
         </Heading>
         <div className="mt-12 flex flex-col items-start justify-center gap-16 sm:flex-row sm:text-left">
           <div className="flex flex-auto flex-col items-center justify-center sm:items-start">
-            <p className="text-3xl">{siteConfig.tagline}</p>
-            <p className="text-lg text-neutral-700">
+            <p className="m-0 text-3xl">{siteConfig.tagline}</p>
+            <p className="m-0 text-lg text-neutral-700">
               Say goodbye to inconsistent and forgotten focus states. Customize
               it to reflect your brand and delight users as they seamlessly
               navigate your application.
             </p>
-            <ul className="mt-4 w-fit space-y-2 text-left text-xl leading-6">
+            <ul className="m-0 mt-4 w-fit list-none space-y-2 p-0 text-left text-xl leading-6">
               <li className="flex gap-3">
                 <CheckBadgeIcon className="h-6 w-6 flex-none" />
                 Open source, free for all.
