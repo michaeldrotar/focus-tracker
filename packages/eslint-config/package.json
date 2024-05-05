@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "devDependencies": {
-    "@docusaurus/eslint-plugin": "^3.2.1",
+    "@docusaurus/eslint-plugin": "^3.3.2",
     "@vercel/style-guide": "^5.2.0",
-    "eslint-config-turbo": "^1.12.4",
+    "eslint-config-turbo": "^1.13.3",
     "eslint-plugin-only-warn": "^1.1.0",
-    "eslint-plugin-unused-imports": "^3.1.0"
+    "eslint-plugin-unused-imports": "^3.2.0"
   }
 }
