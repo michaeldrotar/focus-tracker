@@ -2,10 +2,14 @@
 module.exports = {
   darkMode: ['class', '[data-theme="dark"]'],
   content: ['./src/**/*.{mdx,tsx}'],
+  corePlugins: {
+    container: false, // prefer docusaurus container that works with sidebars
+  },
   theme: {
     colors: {
       background: 'rgb(var(--theme-color-background) / <alpha-value>)',
       foreground: 'rgb(var(--theme-color-foreground) / <alpha-value>)',
+      transparent: 'transparent',
 
       neutral: {
         50: 'rgb(var(--theme-color-neutral-50) / <alpha-value>)',
