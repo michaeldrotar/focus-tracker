@@ -4,7 +4,7 @@ import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 import { Children, isValidElement, useMemo } from 'react'
 
-export type SampleCodeTabsProps = Pick<TabsProps, 'children'>
+export type SampleCodeTabsProps = Pick<TabsProps, 'children' | 'className'>
 export type SampleCodeTabItemProps = Pick<TabItemProps, 'children'>
 
 function getTabItemConfig(tabItem: unknown) {
@@ -17,7 +17,7 @@ function getTabItemConfig(tabItem: unknown) {
   }
 }
 
-function _SampleCodeTabs({ children }: SampleCodeTabsProps) {
+function _SampleCodeTabs({ children, className }: SampleCodeTabsProps) {
   const items = useMemo(() => {
     return Children.toArray(children).map((child) => {
       const config = getTabItemConfig(child)
@@ -31,7 +31,11 @@ function _SampleCodeTabs({ children }: SampleCodeTabsProps) {
       )
     })
   }, [children])
-  return <Tabs groupId="language">{items}</Tabs>
+  return (
+    <Tabs className={className} groupId="language">
+      {items}
+    </Tabs>
+  )
 }
 
 function TypescriptTabItem({ children }: SampleCodeTabItemProps) {
