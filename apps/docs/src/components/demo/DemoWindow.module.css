@@ -20,7 +20,7 @@
   width: 20rem;
 }
 
-.demoWindow3D {
+.demoWindow.demoWindow3D {
   /* TODO: support 3D window from example */
   /* source: https://polypane.app/css-3d-transform-examples/ */
   transform: rotateX(51deg) rotateZ(43deg);
@@ -86,15 +86,15 @@
   width: 0.5rem;
 }
 
-.demoWindowButtonRed {
+.demoWindowButton.demoWindowButtonRed {
   background-color: var(--color-red-500);
 }
 
-.demoWindowButtonYellow {
+.demoWindowButton.demoWindowButtonYellow {
   background-color: var(--color-yellow-500);
 }
 
-.demoWindowButtonGreen {
+.demoWindowButton.demoWindowButtonGreen {
   background-color: var(--color-green-500);
 }
 
@@ -120,7 +120,7 @@
   position: relative;
 }
 
-.demoWindowBodyCentered {
+.demoWindowBody.demoWindowBodyCentered {
   align-items: center;
   display: flex;
   flex-flow: column nowrap;

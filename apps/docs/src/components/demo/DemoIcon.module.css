@@ -7,7 +7,7 @@
   width: 0.5rem;
 }
 
-.DemoIconOutlined {
+.DemoIcon.DemoIconOutlined {
   background-color: transparent;
   border: 1px solid currentColor;
 }

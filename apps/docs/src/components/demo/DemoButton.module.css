@@ -11,20 +11,20 @@
   width: 3rem;
 }
 
-.DemoButtonCircle {
+.DemoButton.DemoButtonCircle {
   border-radius: 50%;
   width: 1.1rem;
 }
 
-.DemoButtonOutlined {
+.DemoButton.DemoButtonOutlined {
   background-color: transparent;
   border: 1px solid rgb(var(--theme-color-neutral-400));
 }
 
-.DemoButtonColored {
+.DemoButton.DemoButtonColored {
   background-color: rgb(var(--theme-color-primary-500));
 }
 
-.DemoButtonColored.DemoButtonOutlined {
+.DemoButton.DemoButtonColored.DemoButtonOutlined {
   border-color: rgb(var(--theme-color-primary-500));
 }
