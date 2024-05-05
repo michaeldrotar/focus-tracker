@@ -1,6 +1,7 @@
 import { themes as prismThemes } from 'prism-react-renderer'
 import type { Config } from '@docusaurus/types'
 import type * as Preset from '@docusaurus/preset-classic'
+import tailwindPlugin from './plugins/tailwind-plugin.cjs'
 
 const config: Config = {
   title: 'Focus Tracker',
@@ -127,6 +128,8 @@ const config: Config = {
       darkTheme: prismThemes.dracula,
     },
   } satisfies Preset.ThemeConfig,
+
+  plugins: [tailwindPlugin],
 }
 
 export default config
