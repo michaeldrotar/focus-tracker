@@ -79,7 +79,7 @@ export function ConfigurationTargetDemo() {
           }}
         >
           {label.split(',').map((part) => (
-            <div key={part}>{part}</div>
+            <span key={part}>{part}</span>
           ))}
         </p>
       </DemoBox>
