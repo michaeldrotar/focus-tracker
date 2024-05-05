@@ -22,7 +22,7 @@ export function HomepageMainDemo() {
       <DemoBox
         style={{
           alignItems: 'center',
-          backgroundColor: 'var(--theme-color-neutral-100)',
+          backgroundColor: 'rgb(var(--theme-color-neutral-100))',
           display: 'flex',
           height: '2rem',
           justifyContent: 'space-between',
@@ -32,7 +32,7 @@ export function HomepageMainDemo() {
         <DemoBox
           data-demo-logo
           style={{
-            backgroundColor: 'var(--theme-color-neutral-400)',
+            backgroundColor: 'rgb(var(--theme-color-neutral-400))',
             height: '1rem',
             width: '4rem',
           }}

@@ -7,8 +7,8 @@
   background-clip: text;
   background-image: linear-gradient(
     135deg,
-    var(--theme-color-primary-500),
-    var(--theme-color-tertiary-500)
+    rgb(var(--theme-color-primary-500)),
+    rgb(var(--theme-color-tertiary-500))
   );
   color: transparent;
   display: inline-block;

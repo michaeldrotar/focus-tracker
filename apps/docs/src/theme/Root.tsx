@@ -7,7 +7,7 @@ export default function Root({ children }) {
     <>
       <FocusTrackerRegistration
         boxShadow="0 0 0.5rem 1px currentColor"
-        color="var(--theme-color-primary-500)"
+        color="rgb(var(--theme-color-primary-500))"
         thickness={2}
       >
         <div>{children}</div>

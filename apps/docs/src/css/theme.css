@@ -30,7 +30,29 @@
   --theme-color-primary-900: var(--color-rose-900);
   --theme-color-primary-950: var(--color-rose-950);
 
+  --theme-color-secondary-50: var(--color-orange-50);
+  --theme-color-secondary-100: var(--color-orange-100);
+  --theme-color-secondary-200: var(--color-orange-200);
+  --theme-color-secondary-300: var(--color-orange-300);
+  --theme-color-secondary-400: var(--color-orange-400);
+  --theme-color-secondary-500: var(--color-orange-500);
+  --theme-color-secondary-600: var(--color-orange-600);
+  --theme-color-secondary-700: var(--color-orange-700);
+  --theme-color-secondary-800: var(--color-orange-800);
+  --theme-color-secondary-900: var(--color-orange-900);
+  --theme-color-secondary-950: var(--color-orange-950);
+
+  --theme-color-tertiary-50: var(--color-amber-50);
+  --theme-color-tertiary-100: var(--color-amber-100);
+  --theme-color-tertiary-200: var(--color-amber-200);
+  --theme-color-tertiary-300: var(--color-amber-300);
+  --theme-color-tertiary-400: var(--color-amber-400);
   --theme-color-tertiary-500: var(--color-amber-500);
+  --theme-color-tertiary-600: var(--color-amber-600);
+  --theme-color-tertiary-700: var(--color-amber-700);
+  --theme-color-tertiary-800: var(--color-amber-800);
+  --theme-color-tertiary-900: var(--color-amber-900);
+  --theme-color-tertiary-950: var(--color-amber-950);
 }
 
 [data-theme='dark'] {
@@ -60,5 +82,27 @@
   --theme-color-primary-900: var(--color-amber-100);
   --theme-color-primary-950: var(--color-amber-50);
 
+  --theme-color-secondary-50: var(--color-orange-50);
+  --theme-color-secondary-100: var(--color-orange-100);
+  --theme-color-secondary-200: var(--color-orange-200);
+  --theme-color-secondary-300: var(--color-orange-300);
+  --theme-color-secondary-400: var(--color-orange-400);
+  --theme-color-secondary-500: var(--color-orange-500);
+  --theme-color-secondary-600: var(--color-orange-600);
+  --theme-color-secondary-700: var(--color-orange-700);
+  --theme-color-secondary-800: var(--color-orange-800);
+  --theme-color-secondary-900: var(--color-orange-900);
+  --theme-color-secondary-950: var(--color-orange-950);
+
+  --theme-color-tertiary-50: var(--color-rose-50);
+  --theme-color-tertiary-100: var(--color-rose-100);
+  --theme-color-tertiary-200: var(--color-rose-200);
+  --theme-color-tertiary-300: var(--color-rose-300);
+  --theme-color-tertiary-400: var(--color-rose-400);
   --theme-color-tertiary-500: var(--color-rose-500);
+  --theme-color-tertiary-600: var(--color-rose-600);
+  --theme-color-tertiary-700: var(--color-rose-700);
+  --theme-color-tertiary-800: var(--color-rose-800);
+  --theme-color-tertiary-900: var(--color-rose-900);
+  --theme-color-tertiary-950: var(--color-rose-950);
 }

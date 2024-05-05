@@ -3,13 +3,13 @@
 }
 
 .demoWindow {
-  background-color: var(--theme-color-background);
+  background-color: rgb(var(--theme-color-background));
   border-radius: 0.6rem;
   box-shadow:
     0rem 0rem 0.75rem 0
-      color-mix(in srgb, var(--theme-color-neutral-800) 20%, transparent),
+      color-mix(in srgb, rgb(var(--theme-color-neutral-800)) 20%, transparent),
     0rem 0.25rem 0.75rem 0
-      color-mix(in srgb, var(--theme-color-neutral-800) 20%, transparent);
+      color-mix(in srgb, rgb(var(--theme-color-neutral-800)) 20%, transparent);
   display: flex;
   flex-flow: column nowrap;
   height: 12.5rem;
@@ -26,10 +26,10 @@
   transform: rotateX(51deg) rotateZ(43deg);
   transform-style: preserve-3d;
   box-shadow:
-    1px 1px 0 1px var(--theme-color-background),
-    -1px 0 28px 0 color-mix(in srgb, var(--theme-color-foreground) 10%, transparent),
+    1px 1px 0 1px rgb(var(--theme-color-background)),
+    -1px 0 28px 0 color-mix(in srgb, rgb(var(--theme-color-foreground)) 10%, transparent),
     28px 28px 28px 0
-      color-mix(in srgb, var(--theme-color-foreground) 25%, transparent);
+      color-mix(in srgb, rgb(var(--theme-color-foreground)) 25%, transparent);
   transition:
     0.4s ease-in-out transform,
     0.4s ease-in-out box-shadow;
@@ -41,9 +41,10 @@
       -1px 0 28px 0 rgba(34, 33, 81, 0.01),
       54px 54px 28px -10px rgba(34, 33, 81, 0.15);
     box-shadow:
-      1px 1px 0 1px var(--theme-color-background),
-      -1px 0 28px 0 color-mix(in srgb, var(--theme-color-foreground) 10%, transparent),
-      54px 54px 28px -10px color-mix(in srgb, var(--theme-color-foreground) 15%, transparent);
+      1px 1px 0 1px rgb(var(--theme-color-background)),
+      -1px 0 28px 0 color-mix(in srgb, rgb(var(--theme-color-foreground)) 10%, transparent),
+      54px 54px 28px -10px color-mix(in srgb, rgb(var(--theme-color-foreground))
+            15%, transparent);
   }
 }
 
@@ -53,7 +54,7 @@
 }
 
 .demoWindowShadow {
-  background-color: var(--theme-color-neutral-800);
+  background-color: rgb(var(--theme-color-neutral-800));
   border-radius: 50%;
   filter: blur(0.5rem);
   height: 1rem;
@@ -64,7 +65,7 @@
 
 .demoWindowTabBar {
   align-items: flex-end;
-  background-color: var(--theme-color-neutral-100);
+  background-color: rgb(var(--theme-color-neutral-100));
   display: flex;
   flex: 0 0 auto;
   flex-flow: row nowrap;
@@ -79,7 +80,7 @@
 }
 
 .demoWindowButton {
-  background-color: var(--theme-color-neutral-500);
+  background-color: rgb(var(--theme-color-neutral-500));
   border-radius: 50%;
   height: 0.5rem;
   width: 0.5rem;
@@ -98,7 +99,7 @@
 }
 
 .demoWindowTab {
-  background-color: var(--theme-color-neutral-200);
+  background-color: rgb(var(--theme-color-neutral-200));
   border-radius: 0.5rem 0.5rem 0 0;
   height: 1.1rem;
   margin-top: 0.25rem;
@@ -106,15 +107,15 @@
 }
 
 .demoWindowAddressBar {
-  background-color: var(--theme-color-neutral-200);
-  border-bottom: 1px solid var(--theme-color-neutral-300);
+  background-color: rgb(var(--theme-color-neutral-200));
+  border-bottom: 1px solid rgb(var(--theme-color-neutral-300));
   flex: 0 0 auto;
   height: 1.15rem;
 }
 
 .demoWindowBody {
-  background-color: var(--theme-color-background);
-  color: var(--theme-color-foreground);
+  background-color: rgb(var(--theme-color-background));
+  color: rgb(var(--theme-color-foreground));
   flex: 1 1 auto;
   position: relative;
 }
@@ -139,7 +140,7 @@
 }
 
 .demoWindowClickOverlay {
-  background-color: var(--theme-color-foreground);
+  background-color: rgb(var(--theme-color-foreground));
   inset: 0;
   opacity: 0;
   position: absolute;
@@ -162,7 +163,7 @@
 }
 
 .demoWindowFlyoutList.Opened {
-  background-color: var(--theme-color-neutral-300);
+  background-color: rgb(var(--theme-color-neutral-300));
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
 }
@@ -173,5 +174,5 @@
 }
 
 .demoWindowFlyoutItem.Selected {
-  background-color: var(--theme-color-neutral-400);
+  background-color: rgb(var(--theme-color-neutral-400));
 }

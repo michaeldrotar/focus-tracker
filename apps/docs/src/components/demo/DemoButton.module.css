@@ -1,5 +1,5 @@
 .DemoButton {
-  background-color: var(--theme-color-neutral-400);
+  background-color: rgb(var(--theme-color-neutral-400));
   border-radius: 0.35rem;
   display: inline-flex;
   flex-flow: row nowrap;
@@ -18,13 +18,13 @@
 
 .DemoButtonOutlined {
   background-color: transparent;
-  border: 1px solid var(--theme-color-neutral-400);
+  border: 1px solid rgb(var(--theme-color-neutral-400));
 }
 
 .DemoButtonColored {
-  background-color: var(--theme-color-primary-500);
+  background-color: rgb(var(--theme-color-primary-500));
 }
 
 .DemoButtonColored.DemoButtonOutlined {
-  border-color: var(--theme-color-primary-500);
+  border-color: rgb(var(--theme-color-primary-500));
 }

@@ -47,9 +47,9 @@ export function ConfigurationTargetDemo() {
         <DemoBox
           data-demo-parent
           style={{
-            border: '2px dashed var(--theme-color-neutral-300)',
-            backgroundColor: 'var(--theme-color-neutral-200)',
-            color: 'var(--theme-color-neutral-700)',
+            border: '2px dashed rgb(var(--theme-color-neutral-300))',
+            backgroundColor: 'rgb(var(--theme-color-neutral-200))',
+            color: 'rgb(var(--theme-color-neutral-700))',
             padding: '0.5rem',
           }}
         >
@@ -57,8 +57,8 @@ export function ConfigurationTargetDemo() {
           <DemoBox
             data-demo-target
             style={{
-              border: '2px dashed var(--theme-color-neutral-400)',
-              backgroundColor: 'var(--theme-color-neutral-300)',
+              border: '2px dashed rgb(var(--theme-color-neutral-400))',
+              backgroundColor: 'rgb(var(--theme-color-neutral-300))',
               marginTop: '0.5rem',
               padding: '0.5rem',
             }}

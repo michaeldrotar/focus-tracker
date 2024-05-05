@@ -42,7 +42,7 @@ To fix contrast issues, a nested configuration makes it simple to change just th
       primaryButton={
         <DemoButton
           data-demo-1
-          style={{ backgroundColor: 'var(--theme-color-neutral-200)' }}
+          style={{ backgroundColor: 'rgb(var(--theme-color-neutral-200))' }}
         />
       }
       secondaryButton={
@@ -50,7 +50,7 @@ To fix contrast issues, a nested configuration makes it simple to change just th
           colored
           outlined
           data-demo-2
-          style={{ borderColor: 'var(--theme-color-neutral-200)' }}
+          style={{ borderColor: 'rgb(var(--theme-color-neutral-200))' }}
         />
       }
     ></DemoHero>
@@ -71,7 +71,7 @@ To fix contrast issues, a nested configuration makes it simple to change just th
     caption="With Nested Configuration"
   >
     <FocusTrackerRegistration
-      color="var(--theme-color-netraul-200)"
+      color="rgb(var(--theme-color-netraul-200))"
       refProperty="rootRef"
     >
       <DemoHero
@@ -79,14 +79,14 @@ To fix contrast issues, a nested configuration makes it simple to change just th
         primaryButton={
           <DemoButton
             data-demo-1
-            style={{ backgroundColor: 'var(--theme-color-neutral-200)' }}
+            style={{ backgroundColor: 'rgb(var(--theme-color-neutral-200))' }}
           />
         }
         secondaryButton={
           <DemoButton
             outlined
             data-demo-2
-            style={{ borderColor: 'var(--theme-color-neutral-200)' }}
+            style={{ borderColor: 'rgb(var(--theme-color-neutral-200))' }}
           />
         }
       ></DemoHero>

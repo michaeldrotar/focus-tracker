@@ -359,17 +359,17 @@
 :root,
 html[data-theme='dark'] {
   /* Base Colors */
-  --ifm-background-color: var(--theme-color-background);
-  --ifm-color-content: var(--theme-color-foreground);
+  --ifm-background-color: rgb(var(--theme-color-background));
+  --ifm-color-content: rgb(var(--theme-color-foreground));
 
   /* Brand Colors */
-  --ifm-color-primary: var(--theme-color-primary-500);
-  --ifm-color-primary-dark: var(--theme-color-primary-600);
-  --ifm-color-primary-darker: var(--theme-color-primary-700);
-  --ifm-color-primary-darkest: var(--theme-color-primary-800);
-  --ifm-color-primary-light: var(--theme-color-primary-400);
-  --ifm-color-primary-lighter: var(--theme-color-primary-300);
-  --ifm-color-primary-lightest: var(--theme-color-primary-200);
+  --ifm-color-primary: rgb(var(--theme-color-primary-500));
+  --ifm-color-primary-dark: rgb(var(--theme-color-primary-600));
+  --ifm-color-primary-darker: rgb(var(--theme-color-primary-700));
+  --ifm-color-primary-darkest: rgb(var(--theme-color-primary-800));
+  --ifm-color-primary-light: rgb(var(--theme-color-primary-400));
+  --ifm-color-primary-lighter: rgb(var(--theme-color-primary-300));
+  --ifm-color-primary-lightest: rgb(var(--theme-color-primary-200));
 
   /* Element Colors */
   --ifm-link-color: var(--ifm-color-primary);
