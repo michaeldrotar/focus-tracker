@@ -5,7 +5,7 @@ import tailwindPlugin from './plugins/tailwind-plugin.cjs'
 
 const config: Config = {
   title: 'Focus Tracker',
-  tagline: 'Enhanced keyboard navigation with accessible focus tracking.',
+  tagline: 'Elevate keyboard navigation with ease.',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
