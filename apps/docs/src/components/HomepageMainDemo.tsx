@@ -18,6 +18,7 @@ export function HomepageMainDemo() {
         { action: 'focus', target: '[data-demo-secondary]' },
         { action: 'blur' },
       ]}
+      className="max-w-full"
     >
       <DemoBox
         style={{
