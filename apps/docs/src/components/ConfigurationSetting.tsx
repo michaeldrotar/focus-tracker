@@ -51,7 +51,9 @@ export function ConfigurationSettingPropertyDemo(
       onAction={(action) => {
         if (action.action === 'config') {
           const value = action.config[name]
-          if (typeof value === 'string' || typeof value === 'number') {
+          if (typeof value === 'string') {
+            setLabel(`"${value}"`)
+          } else if (typeof value === 'number') {
             setLabel(value.toString())
           }
         }
@@ -86,9 +88,7 @@ export function ConfigurationSettingPropertyDemo(
           lineHeight: '1.2',
         }}
       >
-        {label.split(',').map((part) => (
-          <div key={part}>{part}</div>
-        ))}
+        {label}
       </p>
     </DemoWindow>
   )
