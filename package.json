@@ -12,6 +12,7 @@
   "scripts": {
     "add-changeset": "changeset add",
     "build": "turbo build",
+    "check-updates": "npm-check-updates -i --format group --deep",
     "dev": "turbo dev",
     "format": "prettier --write . --ignore-unknown && manypkg fix",
     "postinstall": "manypkg check",
@@ -22,15 +23,16 @@
   },
   "dependencies": {
     "@changesets/cli": "^2.27.1",
-    "@manypkg/cli": "^0.21.3",
+    "@manypkg/cli": "^0.21.4",
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
+    "npm-check-updates": "^16.14.20",
     "prettier": "^3.2.5",
     "prettier-plugin-packagejson": "^2.5.0",
     "prettier-plugin-tailwindcss": "^0.5.14",
-    "turbo": "^1.13.2"
+    "turbo": "^1.13.3"
   },
   "packageManager": "npm@10.2.4",
   "engines": {
