@@ -1,25 +1,27 @@
 import { FocusTrackerRegistration } from '@michaeldrotar/react-focus-tracker'
 import { UserFocusTracker } from '@michaeldrotar/react-focus-tracker/UserFocusTracker'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { PostHogProvider } from 'posthog-js/react'
+import type { PostHog } from 'posthog-js'
 import { useLocation } from '@docusaurus/router'
-import { posthog } from 'posthog-js'
-
-posthog.init('phc_BAB2VZljdFI4ihSLVaIkLumI1d0xoR9tKGIQskpS4SR', {
-  api_host: 'https://us.i.posthog.com',
-  debug: true,
-  capture_pageview: false,
-})
 
 export default function Root({ children }) {
+  const [posthogClient, setPosthogClient] = useState<PostHog>()
   const location = useLocation()
 
   useEffect(() => {
-    posthog.capture('$pageview')
-  }, [location])
+    if ('posthog' in window && window.posthog) {
+      setPosthogClient(window.posthog as PostHog)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!posthogClient) return
+    posthogClient.capture('$pageview')
+  }, [location, posthogClient])
 
   return (
-    <PostHogProvider client={posthog}>
+    <PostHogProvider client={posthogClient}>
       <FocusTrackerRegistration
         boxShadow="0 0 0.5rem 1px currentColor"
         color="rgb(var(--theme-color-primary-500))"
