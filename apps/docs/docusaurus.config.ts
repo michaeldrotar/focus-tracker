@@ -59,7 +59,7 @@ const config: Config = {
   ],
 
   themeConfig: {
-    image: 'img/preview.png', // opengraph image
+    image: 'img/social-banner.png',
     navbar: {
       title: 'Focus Tracker',
       logo: {
