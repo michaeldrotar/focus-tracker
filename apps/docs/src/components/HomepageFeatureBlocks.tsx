@@ -1,6 +1,5 @@
 import type { HTMLAttributes } from 'react'
 import { twMerge } from 'tailwind-merge'
-import Heading from '../theme/Heading'
 import { HomepageFeatureBlock } from './HomepageFeatureBlock'
 import { UserGroupOutlinedIcon } from './icons/UserGroupOutlinedIcon'
 import { PaintbrushOutlinedIcon } from './icons/PaintbrushOutlinedIcon'
@@ -16,10 +15,7 @@ export function HomepageFeatureBlocks(props: HomepageFeatureBlocksProps) {
   return (
     <section className={twMerge('py-8', className)} {...restProps}>
       <div className="container px-8">
-        <Heading as="h2" className="text-center text-3xl font-bold">
-          Use Cases
-        </Heading>
-        <ul className="m-0 mt-8 flex list-none flex-col gap-8 p-0 sm:flex-row">
+        <ul className="m-0 flex list-none flex-col gap-8 p-0 sm:flex-row">
           <li className="flex-1">
             <HomepageFeatureBlock
               icon={
@@ -28,8 +24,8 @@ export function HomepageFeatureBlocks(props: HomepageFeatureBlocksProps) {
               label="For Users"
             >
               <p>
-                Highly visible focus states that move between elements so you
-                never lose sight of it.
+                A highly visible focus indicator to make keyboard navigation
+                enjoyable.
               </p>
             </HomepageFeatureBlock>
           </li>
@@ -41,8 +37,8 @@ export function HomepageFeatureBlocks(props: HomepageFeatureBlocksProps) {
               label="For Designers"
             >
               <p>
-                Design once, use everywhere. Only visible when needed. Never
-                worry about focus states again.
+                Customization to match your brand. Never worry about focus
+                states again.
               </p>
             </HomepageFeatureBlock>
           </li>
@@ -54,8 +50,8 @@ export function HomepageFeatureBlocks(props: HomepageFeatureBlocksProps) {
               label="For Developers"
             >
               <p>
-                Build a global focus state with the flexibility where you need
-                it.
+                A simple integration with flexibility where you need it. Works
+                everywhere.
               </p>
             </HomepageFeatureBlock>
           </li>

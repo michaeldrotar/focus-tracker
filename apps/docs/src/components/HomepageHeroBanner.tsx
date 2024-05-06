@@ -20,7 +20,7 @@ export function HomepageHeroBanner() {
             <p className="m-0 text-3xl">{siteConfig.tagline}</p>
             <p className="m-0 text-lg text-neutral-700">
               Say goodbye to inconsistent and forgotten focus states. Customize
-              it to reflect your brand and delight users as they seamlessly
+              it to reflect your brand and delight your users as they seamlessly
               navigate your application.
             </p>
             <ul className="m-0 mt-4 w-fit list-none space-y-2 p-0 text-left text-xl leading-6">
