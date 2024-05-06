@@ -7,10 +7,10 @@ import tailwindPlugin from './plugins/tailwind-plugin.cjs'
 const config: Config = {
   title: 'Focus Tracker',
   tagline: 'Elevate keyboard navigation with ease.',
-  // favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
+  url: 'https://focus-tracker.michaeldrotar.com',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
@@ -59,14 +59,13 @@ const config: Config = {
   ],
 
   themeConfig: {
-    // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    image: 'img/preview.png', // opengraph image
     navbar: {
       title: 'Focus Tracker',
-      // logo: {
-      //   alt: 'My Site Logo',
-      //   src: 'img/logo.svg',
-      // },
+      logo: {
+        alt: 'Focus Tracker',
+        src: 'img/box-icon.svg',
+      },
       items: [
         {
           type: 'docSidebar',
