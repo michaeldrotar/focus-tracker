@@ -5,8 +5,8 @@ import posthogPlugin from './plugins/posthog-plugin.cjs'
 import tailwindPlugin from './plugins/tailwind-plugin.cjs'
 
 const config: Config = {
-  title: 'Focus Tracker',
-  tagline: 'Elevate keyboard navigation with ease.',
+  title: 'Smooth Focus',
+  tagline: 'Accessible keyboard navigation for the web.',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -61,9 +61,9 @@ const config: Config = {
   themeConfig: {
     image: 'img/social-banner.png',
     navbar: {
-      title: 'Focus Tracker',
+      title: 'Smooth Focus',
       logo: {
-        alt: 'Focus Tracker',
+        alt: 'Smooth Focus',
         src: 'img/box-icon.svg',
       },
       items: [
