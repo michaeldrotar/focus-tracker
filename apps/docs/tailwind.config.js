@@ -51,6 +51,21 @@ module.exports = {
         700: 'rgb(var(--theme-color-tertiary-700) / <alpha-value>)',
         900: 'rgb(var(--theme-color-tertiary-900) / <alpha-value>)',
       },
+
+      web: {
+        foreground: 'rgb(var(--theme-color-web-foreground) / <alpha-value>)',
+        background: 'rgb(var(--theme-color-web-background) / <alpha-value>)',
+      },
+
+      nodejs: {
+        foreground: 'rgb(var(--theme-color-nodejs-foreground) / <alpha-value>)',
+        background: 'rgb(var(--theme-color-nodejs-background) / <alpha-value>)',
+      },
+
+      react: {
+        foreground: 'rgb(var(--theme-color-react-foreground) / <alpha-value>)',
+        background: 'rgb(var(--theme-color-react-background) / <alpha-value>)',
+      },
     },
     extend: {},
   },

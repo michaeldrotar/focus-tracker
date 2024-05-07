@@ -3,6 +3,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import Heading from '../theme/Heading'
 import { HomepageMainDemo } from './HomepageMainDemo'
 import { CheckBadgeIcon } from './icons/CheckBadgeIcon'
+import { HomepageFrameworkList } from './HomepageFrameworkList'
 
 export function HomepageHeroBanner() {
   const { siteConfig } = useDocusaurusContext()
@@ -46,8 +47,9 @@ export function HomepageHeroBanner() {
               </Link>
             </div>
           </div>
-          <div className="flex max-w-full flex-auto justify-center">
+          <div className="flex max-w-full flex-auto flex-col justify-center">
             <HomepageMainDemo />
+            <HomepageFrameworkList className="mt-8" />
           </div>
         </div>
       </div>

@@ -35,6 +35,15 @@
   --theme-color-tertiary-500: var(--color-cyan-500);
   --theme-color-tertiary-700: var(--color-cyan-700);
   --theme-color-tertiary-900: var(--color-cyan-900);
+
+  --theme-color-web-foreground: 1 90 156;
+  --theme-color-web-background: 255 255 255;
+
+  --theme-color-nodejs-foreground: 95 160 79;
+  --theme-color-nodejs-background: 13 18 28;
+
+  --theme-color-react-foreground: 88 196 220;
+  --theme-color-react-background: 35 39 47;
 }
 
 [data-theme='dark'] {
