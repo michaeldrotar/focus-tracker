@@ -128,7 +128,7 @@ const config: Config = {
           `,
           position: 'right',
           className:
-            'navbar__button navbar__button--icon navbar__icon-button--circle',
+            'navbar__button navbar__button--icon navbar__button--circle',
         },
       ],
     },
