@@ -109,12 +109,37 @@ export function DemoWindow(props: DemoWindowProps) {
     const flashKeyboardKey = (key: string) => {
       if (!propsRef.current.showKeyPresses) return
       keyboardKey.textContent = key
-      keyboardKey.style.transition = 'none'
-      keyboardKey.style.opacity = '1'
-      setTimeout(() => {
-        keyboardKey.style.transition = ''
-        keyboardKey.style.opacity = '0'
-      }, 250)
+
+      // press
+      keyboardKey.style.transform = 'translateY(2px)'
+      keyboardKey.style.boxShadow = `
+        0 0 1px rgb(var(--theme-color-neutral-500)),
+        0 1px 0 0 rgb(var(--theme-color-background)),
+        0 -1px 0 0 rgb(var(--theme-color-neutral-300)),
+        0 3px 0 rgb(var(--theme-color-neutral-200)),
+        0 2px 4px rgb(var(--theme-color-neutral-400) / 40),
+        1px 1px 2px rgb(var(--theme-color-neutral-400) / 25),
+        -1px 1px 2px rgb(var(--theme-color-neutral-400) / 25),
+        0 2px 4px rgb(var(--theme-color-neutral-400) / 10)
+      `
+
+      setTimeout(
+        () => {
+          // release
+          keyboardKey.style.transform = 'translateY(0)'
+          keyboardKey.style.boxShadow = `
+            0 0 1px rgb(var(--theme-color-neutral-500)),
+            0 1px 0 0 rgb(var(--theme-color-background)),
+            0 -1px 0 0 rgb(var(--theme-color-neutral-300)),
+            0 3px 0 rgb(var(--theme-color-neutral-200)),
+            0 4px 8px rgb(var(--theme-color-neutral-400) / 40),
+            1px 1px 2px rgb(var(--theme-color-neutral-400) / 25),
+            -1px 1px 2px rgb(var(--theme-color-neutral-400) / 25),
+            0 4px 8px rgb(var(--theme-color-neutral-400) / 10)
+          `
+        },
+        Math.max(100, 0),
+      )
     }
 
     const click = (target: HTMLElement, delay: number = delayInMs) => {
@@ -156,7 +181,7 @@ export function DemoWindow(props: DemoWindowProps) {
         setTimeout(() => {
           focusTracker.focus(flyoutList)
           flyoutList.classList.add(styles.Opened)
-        }, delayInMs / 2)
+        }, 0)
       }
       flashKeyboardKey('Enter')
     }
@@ -315,12 +340,13 @@ export function DemoWindow(props: DemoWindowProps) {
       <div className={styles.demoWindowShadow} />
       <div
         className={clsx(
-          'text-foreground border-1 absolute bottom-5 left-1/2 -translate-x-1/2 rounded-lg border-solid px-2 py-1 text-sm font-bold uppercase text-opacity-50',
-          'border-neutral-300 bg-gradient-to-b from-neutral-100 to-neutral-300', // https://codepen.io/giumagnani/pen/jBNJKw
-          'opacity-0 transition-opacity duration-500 ease-out',
+          'absolute bottom-12 right-2 -translate-x-1/2',
+          'text-foreground border-1 rounded-lg border-solid px-2 py-1 text-xs font-bold uppercase text-opacity-50',
+          'border-neutral-300 bg-gradient-to-b from-neutral-100 to-neutral-300',
         )}
         ref={keyboardKeyRef}
         style={{
+          // styles and shadows adapted from https://codepen.io/giumagnani/pen/jBNJKw
           boxShadow: `
                 0 0 1px rgb(var(--theme-color-neutral-500)),
                 0 1px 0 0 rgb(var(--theme-color-background)),
@@ -335,6 +361,7 @@ export function DemoWindow(props: DemoWindowProps) {
                 0 0.5px 1px rgb(var(--theme-color-neutral-500)),
                 0 2px 6px rgb(var(--theme-color-foreground)),
               `,
+          transition: 'box-shadow 0.1s ease-out, transform 0.1s ease-out',
         }}
       >
         Tab
