@@ -172,7 +172,7 @@ export function Generator(props: GeneratorProps) {
             </div>
           </form>
         </div>
-        <div className="flex-auto">
+        <div className="flex flex-auto flex-col items-center justify-center">
           <FocusTrackerRegistration
             refProperty="rootRef"
             {...defaultConfig}

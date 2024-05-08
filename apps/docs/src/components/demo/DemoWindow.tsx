@@ -343,6 +343,7 @@ export function DemoWindow(props: DemoWindowProps) {
           'absolute bottom-12 right-2 -translate-x-1/2',
           'text-foreground border-1 rounded-lg border-solid px-2 py-1 text-xs font-bold uppercase text-opacity-50',
           'border-neutral-300 bg-gradient-to-b from-neutral-100 to-neutral-300',
+          showKeyPresses ? 'opacity-1' : 'opacity-0',
         )}
         ref={keyboardKeyRef}
         style={{

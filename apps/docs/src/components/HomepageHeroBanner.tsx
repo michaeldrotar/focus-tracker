@@ -49,7 +49,7 @@ export function HomepageHeroBanner() {
             </div>
           </div>
           <div className="flex max-w-full flex-auto flex-col justify-center">
-            <HomepageMainDemo />
+            <HomepageMainDemo showKeyPresses />
             <HomepageFrameworkList className="mt-8" />
           </div>
         </div>

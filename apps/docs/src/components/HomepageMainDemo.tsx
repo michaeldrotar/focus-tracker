@@ -2,9 +2,10 @@ import type { RefObject } from 'react'
 import { DemoBox } from './demo/DemoBox'
 import { DemoButton } from './demo/DemoButton'
 import { DemoHero } from './demo/DemoHero'
+import type { DemoWindowProps } from './demo/DemoWindow'
 import { DemoWindow } from './demo/DemoWindow'
 
-export type HomepageMainDemoProps = {
+export type HomepageMainDemoProps = Pick<DemoWindowProps, 'showKeyPresses'> & {
   rootRef?: RefObject<HTMLElement>
 }
 
@@ -24,7 +25,6 @@ export function HomepageMainDemo(props: HomepageMainDemoProps) {
         { action: 'blur' },
       ]}
       className="max-w-full"
-      showKeyPresses
       {...props}
     >
       <DemoBox
