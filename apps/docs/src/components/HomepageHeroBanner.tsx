@@ -22,7 +22,8 @@ export function HomepageHeroBanner() {
             <p className="m-0 text-lg text-neutral-700">
               Say goodbye to inconsistent and forgotten focus states. Delight
               your users as they tab through forms, navigation, and the rest of
-              your application with a branded focus indicator.
+              your application with an accessible focus indicator that matches
+              your brand.
             </p>
             <ul className="m-0 mt-4 w-fit list-none space-y-2 p-0 text-left text-xl leading-6">
               <li className="flex gap-3">
