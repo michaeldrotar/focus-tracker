@@ -67,7 +67,11 @@ module.exports = {
         background: 'rgb(var(--theme-color-react-background) / <alpha-value>)',
       },
     },
-    extend: {},
+    extend: {
+      borderWidth: {
+        1: '1px',
+      },
+    },
   },
   plugins: [],
 }

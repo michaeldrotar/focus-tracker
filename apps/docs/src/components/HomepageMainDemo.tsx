@@ -24,6 +24,7 @@ export function HomepageMainDemo(props: HomepageMainDemoProps) {
         { action: 'blur' },
       ]}
       className="max-w-full"
+      showKeyPresses
       {...props}
     >
       <DemoBox

@@ -64,6 +64,7 @@ export type DemoWindowProps = Pick<
   centerContent?: boolean
   delayInMs?: number
   rootRef?: RefObject<HTMLElement>
+  showKeyPresses?: boolean
   onInit?: (
     focusTracker: ReturnType<typeof createOtherFocusTracker>,
     demoElement: HTMLElement,
@@ -80,24 +81,23 @@ export function DemoWindow(props: DemoWindowProps) {
     className,
     delayInMs = 1000,
     rootRef,
+    showKeyPresses,
     onInit,
     onAction,
     ...restProps
   } = props
-  const ref = useRef<HTMLDivElement>(null)
-  const onInitRef = useRef<DemoWindowProps['onInit']>(props.onInit)
-  const onActionRef = useRef<((action: AnyAction) => void) | undefined>(
-    onAction,
-  )
+  const demoBodyRef = useRef<HTMLDivElement>(null)
+  const keyboardKeyRef = useRef<HTMLDivElement>(null)
+  const propsRef = useRef<Partial<DemoWindowProps>>(props)
 
   useEffect(() => {
-    onInitRef.current = onInit
-    onActionRef.current = onAction
-  }, [onInit, onAction])
+    propsRef.current = { showKeyPresses, onInit, onAction }
+  }, [showKeyPresses, onInit, onAction])
 
   useStableEffect(() => {
-    const element = ref.current
-    if (!element || !actions?.length) return
+    const element = demoBodyRef.current
+    const keyboardKey = keyboardKeyRef.current
+    if (!element || !keyboardKey || !actions?.length) return
 
     let index = 0
     let timeout: NodeJS.Timeout
@@ -105,6 +105,17 @@ export function DemoWindow(props: DemoWindowProps) {
     const clickOverlay = element.querySelector('[data-demo-click-overlay]')
     const flyoutList = element.querySelector('[data-demo-flyout-list]')
     let flyoutListOpener: HTMLElement | null = null
+
+    const flashKeyboardKey = (key: string) => {
+      if (!propsRef.current.showKeyPresses) return
+      keyboardKey.textContent = key
+      keyboardKey.style.transition = 'none'
+      keyboardKey.style.opacity = '1'
+      setTimeout(() => {
+        keyboardKey.style.transition = ''
+        keyboardKey.style.opacity = '0'
+      }, 250)
+    }
 
     const click = (target: HTMLElement, delay: number = delayInMs) => {
       const position = target.style.position
@@ -121,6 +132,7 @@ export function DemoWindow(props: DemoWindowProps) {
           target.style.overflow = overflow
         }, delay)
       }
+      flashKeyboardKey('Enter')
     }
 
     const selectItem = (which: 1 | 2 | 3 | 4 | 5) => {
@@ -133,6 +145,7 @@ export function DemoWindow(props: DemoWindowProps) {
       if (item instanceof HTMLElement) {
         item.classList.add(styles.Selected)
       }
+      flashKeyboardKey('▼')
     }
 
     const openList = (target: HTMLElement) => {
@@ -145,6 +158,7 @@ export function DemoWindow(props: DemoWindowProps) {
           flyoutList.classList.add(styles.Opened)
         }, delayInMs / 2)
       }
+      flashKeyboardKey('Enter')
     }
 
     const closeList = () => {
@@ -164,6 +178,7 @@ export function DemoWindow(props: DemoWindowProps) {
           closeList()
         }, delayInMs / 2)
       }
+      flashKeyboardKey('Enter')
     }
 
     const getTarget = (target: string) => {
@@ -178,6 +193,7 @@ export function DemoWindow(props: DemoWindowProps) {
       switch (action.action) {
         case 'blur':
           focusTracker.blur()
+          flashKeyboardKey('Tab')
           break
         case 'click':
           if (target) {
@@ -196,6 +212,7 @@ export function DemoWindow(props: DemoWindowProps) {
         case 'focus':
           if (target) {
             focusTracker.focus(target)
+            flashKeyboardKey('Tab')
           }
           break
         case 'open-list':
@@ -207,8 +224,8 @@ export function DemoWindow(props: DemoWindowProps) {
           selectItem(action.which)
           break
       }
-      if (onActionRef.current) {
-        onActionRef.current(action)
+      if (propsRef.current.onAction) {
+        propsRef.current.onAction(action)
       }
     }
 
@@ -223,8 +240,8 @@ export function DemoWindow(props: DemoWindowProps) {
       timeout = setTimeout(execute, delayInMs)
     }
 
-    if (onInitRef.current) {
-      onInitRef.current(focusTracker, ref.current)
+    if (propsRef.current.onInit) {
+      propsRef.current.onInit(focusTracker, demoBodyRef.current)
     }
     execute()
 
@@ -236,14 +253,14 @@ export function DemoWindow(props: DemoWindowProps) {
 
   return (
     <figure
-      className={clsx(styles.demoWindowContainer, className)}
+      className={clsx(styles.demoWindowContainer, 'relative', className)}
       ref={rootRef}
       {...restProps}
     >
       {caption ? (
         <figcaption className={styles.demoWindowCaption}>{caption}</figcaption>
       ) : null}
-      <div className={styles.demoWindow}>
+      <div className={clsx(styles.demoWindow, 'relative')}>
         <div className={styles.demoWindowTabBar}>
           <div className={styles.demoWindowButtons}>
             <div
@@ -264,7 +281,7 @@ export function DemoWindow(props: DemoWindowProps) {
             styles.demoWindowBody,
             centerContent && styles.demoWindowBodyCentered,
           )}
-          ref={ref}
+          ref={demoBodyRef}
         >
           {children}
           <div
@@ -296,6 +313,32 @@ export function DemoWindow(props: DemoWindowProps) {
         </div>
       </div>
       <div className={styles.demoWindowShadow} />
+      <div
+        className={clsx(
+          'text-foreground border-1 absolute bottom-5 left-1/2 -translate-x-1/2 rounded-lg border-solid px-2 py-1 text-sm font-bold uppercase text-opacity-50',
+          'border-neutral-300 bg-gradient-to-b from-neutral-100 to-neutral-300', // https://codepen.io/giumagnani/pen/jBNJKw
+          'opacity-0 transition-opacity duration-500 ease-out',
+        )}
+        ref={keyboardKeyRef}
+        style={{
+          boxShadow: `
+                0 0 1px rgb(var(--theme-color-neutral-500)),
+                0 1px 0 0 rgb(var(--theme-color-background)),
+                0 -1px 0 0 rgb(var(--theme-color-neutral-300)),
+                0 3px 0 rgb(var(--theme-color-neutral-200)),
+                0 4px 8px rgb(var(--theme-color-neutral-400) / 40),
+                1px 1px 2px rgb(var(--theme-color-neutral-400) / 25),
+                -1px 1px 2px rgb(var(--theme-color-neutral-400) / 25),
+                0 4px 8px rgb(var(--theme-color-neutral-400) / 10)
+              `,
+          textShadow: `
+                0 0.5px 1px rgb(var(--theme-color-neutral-500)),
+                0 2px 6px rgb(var(--theme-color-foreground)),
+              `,
+        }}
+      >
+        Tab
+      </div>
     </figure>
   )
 }
